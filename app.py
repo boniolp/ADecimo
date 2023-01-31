@@ -17,11 +17,11 @@ tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('measure used: {}'.format(metric_name))
-    st.dataframe(df[[method + '_score' for method in methods if method not in old_method+oracle] + [old_method]])
+    st.dataframe(df[[method + '_score' for method in methods] + [old_method]])
     
 with tab_time:
     st.markdown('# Execution Time Evaluation')
-    st.dataframe(df[[method + '_inf' for method in methods if method not in old_method+oracle] + [old_method]])
+    st.dataframe(df[[method + '_inf' for method in methods] + [old_method]])
     
 with tab_stats:
     st.markdown('# Dataset Statistics')
