@@ -1,5 +1,9 @@
 list_measures = ['VUS_PR','AUC_PR','VUS_ROC','AUC_ROC']
 
+dataset_stats = ['period_length', 'ratio', 'nb_anomaly', 'average_anom_length',
+       'median_anom_length', 'std_anom_length', 'data_len',
+       'point_anom', 'seq_anom', 'mixed_anom', 'type_an']
+
 methods = ['convnet_default_16', 'convnet_default_32',
        'convnet_default_64', 'convnet_default_128', 'convnet_default_256',
        'convnet_default_512', 'convnet_default_768', 'convnet_default_1024',
