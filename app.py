@@ -16,8 +16,7 @@ df = df.set_index('filename')
 def plot_box_plot(df):
     fig = plt.figure(figsize=(10, 30))
     order = list(df_toplot.median().sort_values().index)[::-1]
-    sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h')  
-    sns.stripplot(data=df_toplot,order=order,size=1, color=".3", linewidth=0,orient='h')
+    sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h') 
     st.pyplot(fig)
     
 
