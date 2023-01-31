@@ -9,7 +9,7 @@ with st.sidebar:
     st.markdown('# ADecimo') 
     st.markdown('### Model selection for time series anomaly detection') 
     
-tab1, tab2 = st.tabs(["Accuracy", "Execution Time"])  
+tab_acc, tab_time = st.tabs(["Accuracy", "Execution Time"])  
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
     
