@@ -27,9 +27,9 @@ with st.sidebar:
     container = st.container()
     all = st.checkbox("Select all")
     if all: 
-        container.multiselect('Select Datasets', list(set(df['dataset'].values)), list(set(df['dataset'].values)))
+        datasets = container.multiselect('Select Datasets', list(set(df['dataset'].values)), list(set(df['dataset'].values)))
     else: 
-        container.multiselect('Select Datasets', list(set(df['dataset'].values))) 
+        datasets = container.multiselect('Select Datasets', list(set(df['dataset'].values))) 
     
     methods_family = st.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'])
  
