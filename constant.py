@@ -1,3 +1,5 @@
+list_measures = ['VUS_PR','AUC_PR','VUS_ROC','AUC_ROC']
+
 methods = ['convnet_default_16', 'convnet_default_32',
        'convnet_default_64', 'convnet_default_128', 'convnet_default_256',
        'convnet_default_512', 'convnet_default_768', 'convnet_default_1024',
