@@ -8,7 +8,14 @@ import streamlit as st
 
 from constant import *
 
-plt.style.use('dark_background')
+#plt.style.use('dark_background')
+
+def plot_box_plot(df):
+    fig = plt.figure(figsize=(10, 20))
+    order = list(df_toplot.median().sort_values().index)[::-1]
+    sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h')    
+    st.pyplot(fig)
+    
 
 with st.sidebar:
     st.markdown('# ADecimo') 
@@ -24,18 +31,13 @@ with tab_acc:
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
     df_toplot = df[[method + '_score' for method in methods] + old_method]
     st.dataframe(df_toplot)
-    
-    fig = plt.figure(figsize=(10, 20))
-    order = list(df_toplot.median().sort_values().index)[::-1]
-    sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h')
-    fig.patch.set_facecolor((0.0, 0.0, 0.0,0.0))
-    fig.patch.set_facecolor((0.0, 0.0, 0.0,0.0))
-    
-    st.pyplot(fig)
+    plot_box_plot(df_toplot)
     
 with tab_time:
     st.markdown('# Execution Time Evaluation')
-    st.dataframe(df[[method + '_inf' for method in methods] + old_method])
+    df_toplot = df[[method + '_inf' for method in methods] + old_method]
+    st.dataframe(df_toplot)
+    plot_box_plot(df_toplot)
     
 with tab_stats:
     st.markdown('# Dataset Statistics')
