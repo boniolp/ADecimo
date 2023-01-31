@@ -24,7 +24,7 @@ with st.sidebar:
     st.markdown('# ADecimo') 
     st.markdown('### Model selection for time series anomaly detection') 
     metric_name = st.selectbox('Pick an accuracy measure', list_measures)
-    container = st.beta_container()
+    container = st.container()
     all = st.checkbox("Select all")
     if all: 
         container.multiselect('Select Datasets', list(set(df['dataset'].values)), list(set(df['dataset'].values)))
