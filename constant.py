@@ -1,5 +1,7 @@
 list_measures = ['VUS_PR','AUC_PR','VUS_ROC','AUC_ROC']
 
+list_length = [16,32,64,128,256,512,768,1024]
+
 dataset_stats = ['dataset','period_length', 'ratio', 'nb_anomaly', 'average_anom_length',
        'median_anom_length', 'std_anom_length', 'data_len',
        'point_anom', 'seq_anom', 'mixed_anom', 'type_an']
