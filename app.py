@@ -4,6 +4,7 @@ import math
 import pandas as pd
 import streamlit as st
 
+from constant import *
 
 with st.sidebar:
     st.markdown('# ADecimo') 
