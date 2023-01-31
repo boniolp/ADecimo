@@ -24,6 +24,7 @@ with tab_acc:
     st.dataframe(df_toplot)
     
     fig = plt.figure(figsize=(10, 4))
+    order = list(df_toplot.median().sort_values().index)[::-1]
     sns.boxplot(data=df_toplot,order=order,showfliers = False)
     st.pyplot(fig)
     
