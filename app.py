@@ -1,6 +1,8 @@
 from collections import namedtuple
 import altair as alt
 import math
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pandas as pd
 import streamlit as st
 
