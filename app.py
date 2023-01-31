@@ -9,7 +9,7 @@ from constant import *
 with st.sidebar:
     st.markdown('# ADecimo') 
     st.markdown('### Model selection for time series anomaly detection') 
-    metric_name = st.selectbox('Pick an accuracy measure', ['VUS-PR','AUC-PR','VUS-ROC','AUC-ROC'])
+    metric_name = st.selectbox('Pick an accuracy measure', list_measures)
     
 tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"])  
 with tab_acc:
