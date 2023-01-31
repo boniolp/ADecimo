@@ -13,7 +13,9 @@ with st.sidebar:
 tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"])  
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
-    st.markdown(metric_name)
+    st.markdown('measure used: {}'.format(metric_name))
+    df = pd.read_csv('data/merged_scores_{}.csv'.format(metric_name))
+    st.dataframe(df)
     
 with tab_time:
     st.markdown('# Execution Time Evaluation')
