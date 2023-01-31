@@ -25,7 +25,7 @@ with st.sidebar:
     st.markdown('### Model selection for time series anomaly detection') 
     metric_name = st.selectbox('Pick an accuracy measure', list_measures)
     datasets = st.multiselect('Select Datasets', list(set(df['dataset'].values)))
-    methods_family = st.multiselect('Select Datasets', ['Transformer','Convolutional','Rocket','Features'])
+    methods_family = st.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'])
  
 df = pd.read_csv('data/merged_scores_{}.csv'.format(metric_name))
 df = df.set_index('filename')
