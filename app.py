@@ -26,17 +26,17 @@ with st.sidebar:
     metric_name = st.selectbox('Pick an accuracy measure', list_measures)
     
     container_dataset = st.container()  
-    all_dataset = st.checkbox("Select all")
+    all_dataset = st.checkbox("Select all",key='all_dataset')
     if all_dataset: container_dataset = container_dataset.multiselect('Select Datasets', list(set(df['dataset'].values)), list(set(df['dataset'].values)))
     else: container_dataset = container_dataset.multiselect('Select Datasets', list(set(df['dataset'].values))) 
     
     container_method = st.container()
-    all_method = st.checkbox("Select all")
+    all_method = st.checkbox("Select all",key='all_method')
     if all_method: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'], ['Transformer','Convolutional','Rocket','Features'])
     else: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'])
     
     container_length = st.container()
-    all_length = st.checkbox("Select all")
+    all_length = st.checkbox("Select all",key='all_length')
     if all_length: length = container_length.multiselect('Select a window length', list_length, list_length)
     else: length = container_length.multiselect('Select a window length', list_length)
 
