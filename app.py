@@ -8,6 +8,8 @@ import streamlit as st
 
 from constant import *
 
+plt.style.use('dark_background')
+
 with st.sidebar:
     st.markdown('# ADecimo') 
     st.markdown('### Model selection for time series anomaly detection') 
@@ -19,7 +21,7 @@ df = df.set_index('filename')
 tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"])  
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
-    st.markdown('measure used: {}'.format(metric_name))
+    st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
     df_toplot = df[[method + '_score' for method in methods] + old_method]
     st.dataframe(df_toplot)
     
