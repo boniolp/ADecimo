@@ -27,8 +27,8 @@ with st.sidebar:
     
     container_dataset = st.container()  
     all_dataset = st.checkbox("Select all",key='all_dataset')
-    if all_dataset: container_dataset = container_dataset.multiselect('Select Datasets', list(set(df['dataset'].values)), list(set(df['dataset'].values)))
-    else: container_dataset = container_dataset.multiselect('Select Datasets', list(set(df['dataset'].values))) 
+    if all_dataset: datasets = container_dataset.multiselect('Select Datasets', list(set(df['dataset'].values)), list(set(df['dataset'].values)))
+    else: datasets = container_dataset.multiselect('Select Datasets', list(set(df['dataset'].values))) 
     
     container_method = st.container()
     all_method = st.checkbox("Select all",key='all_method')
