@@ -18,7 +18,12 @@ tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('measure used: {}'.format(metric_name))
-    st.dataframe(df[[method + '_score' for method in methods] + old_method])
+    df_toplot = df[[method + '_score' for method in methods] + old_method]
+    st.dataframe(df_toplot)
+    
+    fig = plt.figure(figsize=(10, 4))
+    sns.boxplot(data=df_toplot,order=order,showfliers = False)
+    st.pyplot(fig)
     
 with tab_time:
     st.markdown('# Execution Time Evaluation')
