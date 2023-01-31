@@ -25,4 +25,5 @@ with tab_time:
     
 with tab_stats:
     st.markdown('# Dataset Statistics')
+    st.dataframe(df[dataset_stats])
     
