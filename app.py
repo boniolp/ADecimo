@@ -23,9 +23,9 @@ with tab_acc:
     df_toplot = df[[method + '_score' for method in methods] + old_method]
     st.dataframe(df_toplot)
     
-    fig = plt.figure(figsize=(10, 4))
+    fig = plt.figure(figsize=(10, 20))
     order = list(df_toplot.median().sort_values().index)[::-1]
-    sns.boxplot(data=df_toplot,order=order,showfliers = False)
+    sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='v')
     st.pyplot(fig)
     
 with tab_time:
