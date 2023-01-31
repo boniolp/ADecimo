@@ -12,6 +12,7 @@ with st.sidebar:
     metric_name = st.selectbox('Pick an accuracy measure', list_measures)
  
 df = pd.read_csv('data/merged_scores_{}.csv'.format(metric_name))
+df = df.set_index('filename')
 
 tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"])  
 with tab_acc:
