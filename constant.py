@@ -26,9 +26,7 @@ methods = ['convnet_default_16', 'convnet_default_32',
        'sit_stem_relu_64', 'sit_stem_relu_128', 'sit_stem_relu_256',
        'sit_stem_relu_512', 'sit_stem_relu_768', 'sit_stem_relu_1024','rocket_16', 'rocket_32',
        'rocket_64', 'rocket_128', 'rocket_256', 'rocket_512', 'rocket_768',
-       'rocket_1024', 'GENIE',
-       'MORTY', 'IFOREST', 'LOF', 'MP', 'NORMA', 'IFOREST1', 'HBOS', 'OCSVM',
-       'PCA', 'AE', 'CNN', 'LSTM', 'POLY']
+       'rocket_1024']
 
 old_method = ['IFOREST', 'LOF', 'MP', 'NORMA', 'IFOREST1', 'HBOS', 'OCSVM',
        'PCA', 'AE', 'CNN', 'LSTM', 'POLY']
