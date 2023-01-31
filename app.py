@@ -14,7 +14,7 @@ df = pd.read_csv('data/merged_scores_{}.csv'.format('VUS_PR'))
 df = df.set_index('filename')
 
 def plot_box_plot(df):
-    fig = plt.figure(figsize=(10, 20))
+    fig = plt.figure(figsize=(10, 30))
     order = list(df_toplot.median().sort_values().index)[::-1]
     sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h')    
     st.pyplot(fig)
