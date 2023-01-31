@@ -24,7 +24,13 @@ with st.sidebar:
     st.markdown('# ADecimo') 
     st.markdown('### Model selection for time series anomaly detection') 
     metric_name = st.selectbox('Pick an accuracy measure', list_measures)
-    datasets = st.multiselect('Select Datasets', list(set(df['dataset'].values)))
+    container = st.beta_container()
+    all = st.checkbox("Select all")
+    if all: 
+        container.multiselect('Select Datasets', list(set(df['dataset'].values)), list(set(df['dataset'].values)))
+    else: 
+        container.multiselect('Select Datasets', list(set(df['dataset'].values))) 
+    
     methods_family = st.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'])
  
 df = pd.read_csv('data/merged_scores_{}.csv'.format(metric_name))
