@@ -61,13 +61,13 @@ with st.sidebar:
     
     container_method = st.container()
     all_method = st.checkbox("Select all",key='all_method')
-    if all_method: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'], ['Transformer','Convolutional','Rocket','Features'])
-    else: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'])
+    if all_method: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'], ['Transformer','Convolutional','Rocket','Features'],key='selector_methods_all')
+    else: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'],key='selector_methods')
     
     container_length = st.container()
     all_length = st.checkbox("Select all",key='all_length')
-    if all_length: length = container_length.multiselect('Select a window length', list_length, list_length)
-    else: length = container_length.multiselect('Select a window length', list_length)
+    if all_length: length = container_length.multiselect('Select a window length', list_length, list_length,key='selector_length_all')
+    else: length = container_length.multiselect('Select a window length', list_length,key='selector_length')
 
 df = pd.read_csv('data/merged_scores_{}.csv'.format(metric_name))
 df = df.set_index('filename')
