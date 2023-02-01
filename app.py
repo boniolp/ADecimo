@@ -45,7 +45,7 @@ def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
         selected_methods_all += [method.format(l) for method in selected_methods]
     
     #Filter by selected datasets
-    return df.loc[df['dataset'].isin(datasets)][selected_methods_all].copy()
+    return df.loc[df['dataset'].isin(datasets)][selected_methods_all].copy(),selected_methods_all
         
     
     
@@ -76,19 +76,19 @@ tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
-    df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
+    df_toplot,selected_methods_all = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
     st.write('You selected:', datasets)
     st.write('You selected:', methods_family)
     st.write('You selected:', length)
     st.write(st.session_state)
-    st.write(df_toplot.columns)
+    st.write(selected_methods_all)
     st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
     
 with tab_time:
     st.markdown('# Execution Time Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: Prediction time in seconds')
-    df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_inf')
+    df_toplot,selected_methods_all = generate_dataframe(df,datasets,methods_family,length,type_exp='_inf')
     st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
     
