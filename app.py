@@ -32,6 +32,8 @@ def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
     elif 'Features' in methods_family:
         selected_methods += [method.replace('_score',type_exp) for method in methods_classical]
     
+    print(selected_methods)
+    
     #Display old AD methods only for acc plot
     if type_exp == '_score':
         selected_methods_all = old_method
