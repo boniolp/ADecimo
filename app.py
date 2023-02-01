@@ -34,8 +34,6 @@ def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
     else:
         selected_methods = []
     
-    print(selected_methods)
-    
     #Display old AD methods only for acc plot
     if type_exp == '_score':
         selected_methods_all = old_method
@@ -83,6 +81,7 @@ with tab_acc:
     st.write('You selected:', methods_family)
     st.write('You selected:', length)
     st.write(st.session_state)
+    st.write(df_toplot.columns)
     st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
     
