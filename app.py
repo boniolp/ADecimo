@@ -31,6 +31,8 @@ def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
         selected_methods += [method.replace('_score',type_exp) for method in methods_ts]
     elif 'Features' in methods_family:
         selected_methods += [method.replace('_score',type_exp) for method in methods_classical]
+    else:
+        selected_methods = []
     
     print(selected_methods)
     
