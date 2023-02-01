@@ -70,7 +70,7 @@ with tab_time:
 with tab_stats:
     st.markdown('# Dataset Statistics')
     st.dataframe(df[dataset_stats])
-    fig = plt.figure(figsize=(10, 4)
+    fig = plt.figure(figsize=(10, 4))
     for i,elem_stat in enumerate(dataset_stats_real):
         fig.subplot(1,len(dataset_stats_real),1+i)
         sns.kdeplot(x=df[elem_stat].values, fill=True)
