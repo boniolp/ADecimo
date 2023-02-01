@@ -66,6 +66,14 @@ with tab_time:
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: Prediction time in seconds')
     df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_inf')
     plot_box_plot(df_toplot)
+    tab_training, tab_prediction, tab_inference = st.tabs(["Training Time", "Prediction Time", "Inference Time"])  
+    with tab_training:
+        st.markdown('## Training Time Evaluation')
+    with tab_prediction:
+        st.markdown('## Prediction Time Evaluation')
+    with tab_inference:
+        st.markdown('## Inference Time Evaluation')
+        
     
 with tab_stats:
     st.markdown('# Dataset Statistics')
