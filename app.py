@@ -22,6 +22,7 @@ def plot_box_plot(df):
     
 def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
     #Get selected methods
+    selected_methods = []
     if 'Transformer' in methods_family:
         selected_methods += [method.replace('_score',type_exp) for method in methods_sit]
     elif 'Convolutional' in methods_family:
