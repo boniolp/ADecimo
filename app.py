@@ -72,8 +72,9 @@ with tab_stats:
     st.dataframe(df[dataset_stats])
     fig = plt.figure(figsize=(10, 4))
     for i,elem_stat in enumerate(dataset_stats_real):
-        fig.subplot(1,len(dataset_stats_real),1+i)
-        sns.kdeplot(x=df[elem_stat].values, fill=True)
+        plt.subplot(1,len(dataset_stats_real),1+i)
+        sns.histplot(x=df[elem_stat].values,bins=30, fill=True)
         plt.xlabel(elem_stat)
+        plt.tight_layout()
     st.pyplot(fig)
     
