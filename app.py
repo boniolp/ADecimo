@@ -62,7 +62,7 @@ with st.sidebar:
     container_method = st.container()
     all_method = st.checkbox("Select all",key='all_method')
     if all_method: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'], ['Transformer','Convolutional','Rocket','Features'])
-    else: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'],['Transformer'])
+    else: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'])
     
     container_length = st.container()
     all_length = st.checkbox("Select all",key='all_length')
