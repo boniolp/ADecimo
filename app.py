@@ -55,9 +55,6 @@ tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
-    st.write('You selected:', datasets)
-    st.write('You selected:', methods_family)
-    st.write('You selected:', length)
     df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
     st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
