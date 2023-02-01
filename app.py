@@ -21,30 +21,10 @@ def plot_box_plot(df):
         st.pyplot(fig)
     
 def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
-    #Get selected methods
-    selected_methods = []
-    selected_methods_all = []
-    if 'Transformer' in methods_family:
-        selected_methods += [method.replace('_score',type_exp) for method in methods_sit]
-    if 'Convolutional' in methods_family:
-        selected_methods += [method.replace('_score',type_exp) for method in methods_conv]
-    if 'Rocket' in methods_family:
-        selected_methods += [method.replace('_score',type_exp) for method in methods_ts]
-    if 'Features' in methods_family:
-        selected_methods += [method.replace('_score',type_exp) for method in methods_classical]
-    
-    #Display old AD methods only for acc plot
     if type_exp == '_score':
-        selected_methods_all = old_method
+        return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score',type_exp) for method_g in methods_family for method in method_group[method_g] for l in length]+old_method]
     elif type_exp == '_inf':
-        selected_methods_all = []
-    
-    #Get selected length
-    for l in length:
-        selected_methods_all += [method.format(l) for method in selected_methods]
-    
-    #Filter by selected datasets
-    return df.loc[df['dataset'].isin(datasets)][selected_methods_all].copy(),selected_methods_all
+        return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score',type_exp) for method_g in methods_family for method in method_group[method_g] for l in length]]
         
     
     
@@ -58,17 +38,15 @@ with st.sidebar:
     if all_dataset: datasets = container_dataset.multiselect('Select Datasets', list(set(df['dataset'].values)), list(set(df['dataset'].values)))
     else: datasets = container_dataset.multiselect('Select Datasets', list(set(df['dataset'].values))) 
     
-    #container_method = st.container()
-    #all_method = st.checkbox("Select all",key='all_method')
-    #if all_method: methods_family = container_method.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'], ['Transformer','Convolutional','Rocket','Features'],key='selector_methods_all')
-    #else: 
-    methods_family = st.multiselect('Select a group of methods', ['Transformer','Convolutional','Rocket','Features'],key='selector_methods')
+    container_method = st.container()
+    all_method = st.checkbox("Select all",key='all_method')
+    if all_method: methods_family = container_method.multiselect('Select a group of methods', list(method_group.keys()), list(method_group.keys()),key='selector_methods_all')
+    else: methods_family = container_method.multiselect('Select a group of methods', list(method_group.keys()),key='selector_methods')
     
-    #container_length = st.container()
-    #all_length = st.checkbox("Select all",key='all_length')
-    #if all_length: length = container_length.multiselect('Select a window length', list_length, list_length,key='selector_length_all')
-    #else: 
-    length = st.multiselect('Select a window length', list_length,key='selector_length')
+    container_length = st.container()
+    all_length = st.checkbox("Select all",key='all_length')
+    if all_length: length = container_length.multiselect('Select a window length', list_length, list_length,key='selector_length_all')
+    else: length = container_length.multiselect('Select a window length', list_length,key='selector_length')
 
 df = pd.read_csv('data/merged_scores_{}.csv'.format(metric_name))
 df = df.set_index('filename')
