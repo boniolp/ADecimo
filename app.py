@@ -25,14 +25,12 @@ def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
     selected_methods = []
     if 'Transformer' in methods_family:
         selected_methods += [method.replace('_score',type_exp) for method in methods_sit]
-    elif 'Convolutional' in methods_family:
+    if 'Convolutional' in methods_family:
         selected_methods += [method.replace('_score',type_exp) for method in methods_conv]
-    elif 'Rocket' in methods_family:
+    if 'Rocket' in methods_family:
         selected_methods += [method.replace('_score',type_exp) for method in methods_ts]
-    elif 'Features' in methods_family:
+    if 'Features' in methods_family:
         selected_methods += [method.replace('_score',type_exp) for method in methods_classical]
-    else:
-        selected_methods = []
     
     #Display old AD methods only for acc plot
     if type_exp == '_score':
@@ -76,11 +74,10 @@ tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
-    df_toplot,selected_methods_all = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
     st.write('You selected:', datasets)
     st.write('You selected:', methods_family)
     st.write('You selected:', length)
-    st.write(st.session_state)
+    df_toplot,selected_methods_all = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
     st.write(selected_methods_all)
     st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
