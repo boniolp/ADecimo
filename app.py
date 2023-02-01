@@ -71,7 +71,7 @@ with tab_time:
 with tab_stats:
     st.markdown('# Dataset Statistics')
     st.dataframe(df[dataset_stats])
-    fig = plt.figure(figsize=(10,10)
+    fig = plt.figure(figsize=(10,10))
     sns.PairGrid(df[dataset_stats_real], diag_sharey=False)
     st.pyplot(fig)
     
