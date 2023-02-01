@@ -59,7 +59,6 @@ with tab_acc:
     st.write('You selected:', methods_family)
     st.write('You selected:', length)
     df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
-    st.write(selected_methods_all)
     st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
     
