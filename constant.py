@@ -2,9 +2,12 @@ list_measures = ['VUS_PR','AUC_PR','VUS_ROC','AUC_ROC']
 
 list_length = [16,32,64,128,256,512,768,1024]
 
-dataset_stats = ['dataset','period_length', 'ratio', 'nb_anomaly', 'average_anom_length',
-       'median_anom_length', 'std_anom_length', 'data_len',
-       'point_anom', 'seq_anom', 'mixed_anom', 'type_an']
+dataset_stats_real = ['period_length', 'ratio', 'nb_anomaly', 'average_anom_length',
+       'median_anom_length', 'std_anom_length', 'data_len']
+
+dataset_cat = ['dataset','point_anom', 'seq_anom', 'mixed_anom', 'type_an']
+
+dataset_stats = dataset_cat + dataset_stats_real
 
 methods = ['inception_time_default_16',
        'inception_time_default_32','inception_time_default_64','inception_time_default_128','inception_time_default_256',
