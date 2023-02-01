@@ -18,7 +18,7 @@ df = df.set_index('filename')
 def plot_box_plot(df):
     if len(df.columns) > 0:
         st.dataframe(df_toplot)
-        fig = plt.figure(figsize=(10, min(30,int(0.40*len(df.columns)))))
+        fig = plt.figure(figsize=(10, min(30,max(1,int(0.40*len(df.columns))))))
         order = list(df_toplot.median().sort_values().index)[::-1]
         sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h') 
         st.pyplot(fig)
