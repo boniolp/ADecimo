@@ -14,12 +14,30 @@ df = pd.read_csv('data/merged_scores_{}.csv'.format('VUS_PR'))
 df = df.set_index('filename')
 
 def plot_box_plot(df):
-    fig = plt.figure(figsize=(10, 30))
+    fig = plt.figure(figsize=(10, int(0.21*len(df.columns))))
     order = list(df_toplot.median().sort_values().index)[::-1]
     sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h') 
     st.pyplot(fig)
     
-
+def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
+    if type_exp == '_score':
+        selected_methods = old_method
+    elif type_exp == '_inf':
+        selected_methods = []
+        
+    if 'Transformer' in methods_family:
+        selected_methods += [method.format(length).replace('_score',type_exp) for method in methods_sit]
+    elif 'Convolutional' in methods_family:
+        selected_methods += [method.format(length).replace('_score',type_exp) for method in methods_conv]
+    elif 'Rocket' in methods_family:
+        selected_methods += [method.format(length).replace('_score',type_exp) for method in methods_ts]
+    elif 'Features' in methods_family:
+        selected_methods += [method.format(length).replace('_score',type_exp) for method in methods_classical]
+    
+    return df.loc[df['dataset'].isin(datasets)][selected_methods]
+        
+    
+    
 with st.sidebar:
     st.markdown('# ADecimo') 
     st.markdown('### Model selection for time series anomaly detection') 
@@ -47,13 +65,14 @@ tab_acc, tab_time, tab_stats = st.tabs(["Accuracy", "Execution Time", "Datasets"
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
-    df_toplot = df.loc[df['dataset'].isin(datasets)][[method + '_score' for method in methods] + old_method]
+    generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
     st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
     
 with tab_time:
     st.markdown('# Execution Time Evaluation')
-    df_toplot = df.loc[df['dataset'].isin(datasets)][[method + '_inf' for method in methods]]
+    st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: Prediction time in seconds)
+    generate_dataframe(df,datasets,methods_family,length,type_exp='_inf')
     st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
     
