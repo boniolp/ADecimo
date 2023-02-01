@@ -45,7 +45,7 @@ def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
         selected_methods_all += [method.format(l) for method in selected_methods]
     
     #Filter by selected datasets
-    return df.loc[df['dataset'].isin(datasets)][selected_methods_all]
+    return df.loc[df['dataset'].isin(datasets)][selected_methods_all].copy()
         
     
     
