@@ -73,6 +73,6 @@ with tab_stats:
     g = sns.PairGrid(df[dataset_stats_real], diag_sharey=False)
     g.map_upper(sns.scatterplot, s=15)
     g.map_lower(sns.kdeplot)
-    g.map_diag(sns.kdeplot, lw=2)
+    g.map_diag(sns.kdeplot, lw=2,fill=True)
     st.pyplot(g)
     
