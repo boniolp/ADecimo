@@ -8,8 +8,8 @@ import streamlit as st
 
 from constant import *
 
-if st.theme() == 'Dark':
-    plt.style.use('dark_background')
+
+#plt.style.use('dark_background')
 
 
 df = pd.read_csv('data/merged_scores_{}.csv'.format('VUS_PR'))
