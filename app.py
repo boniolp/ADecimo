@@ -21,21 +21,28 @@ def plot_box_plot(df):
         st.pyplot(fig)
     
 def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
-    if type_exp == '_score':
-        selected_methods = old_method
-    elif type_exp == '_inf':
-        selected_methods = []
-        
+    #Get selected methods
     if 'Transformer' in methods_family:
-        selected_methods += [method.format(length).replace('_score',type_exp) for method in methods_sit]
+        selected_methods += [method.replace('_score',type_exp) for method in methods_sit]
     elif 'Convolutional' in methods_family:
-        selected_methods += [method.format(length).replace('_score',type_exp) for method in methods_conv]
+        selected_methods += [method.replace('_score',type_exp) for method in methods_conv]
     elif 'Rocket' in methods_family:
-        selected_methods += [method.format(length).replace('_score',type_exp) for method in methods_ts]
+        selected_methods += [method.replace('_score',type_exp) for method in methods_ts]
     elif 'Features' in methods_family:
-        selected_methods += [method.format(length).replace('_score',type_exp) for method in methods_classical]
+        selected_methods += [method.replace('_score',type_exp) for method in methods_classical]
     
-    return df.loc[df['dataset'].isin(datasets)][selected_methods]
+    #Display old AD methods only for acc plot
+    if type_exp == '_score':
+        selected_methods_all = old_method
+    elif type_exp == '_inf':
+        selected_methods_all = []
+    
+    #Get selected length
+    for l in length:
+        selected_methods_all += [method.format(l) for method in selected_methods]
+    
+    #Filter by selected datasets
+    return df.loc[df['dataset'].isin(datasets)][selected_methods_all]
         
     
     
