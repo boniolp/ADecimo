@@ -71,6 +71,9 @@ with tab_stats:
     st.markdown('# Dataset Statistics')
     st.dataframe(df[dataset_stats])
     fig = plt.figure(figsize=(10,10))
-    sns.PairGrid(df[dataset_stats_real], diag_sharey=False)
+    g = sns.PairGrid(df[dataset_stats_real], diag_sharey=False)
+    g.map_upper(sns.scatterplot, s=15)
+    g.map_lower(sns.kdeplot)
+    g.map_diag(sns.kdeplot, lw=2)
     st.pyplot(fig)
     
