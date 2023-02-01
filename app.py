@@ -17,6 +17,7 @@ df = df.set_index('filename')
 
 def plot_box_plot(df):
     if len(df.columns) > 0:
+        st.dataframe(df_toplot)
         fig = plt.figure(figsize=(10, min(30,int(0.40*len(df.columns)))))
         order = list(df_toplot.median().sort_values().index)[::-1]
         sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h') 
@@ -58,14 +59,12 @@ with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
     df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
-    st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
     
 with tab_time:
     st.markdown('# Execution Time Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: Prediction time in seconds')
     df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_inf')
-    st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
     
 with tab_stats:
