@@ -82,6 +82,7 @@ with tab_acc:
     st.write('You selected:', datasets)
     st.write('You selected:', methods_family)
     st.write('You selected:', length)
+    st.write(st.session_state)
     st.dataframe(df_toplot)
     plot_box_plot(df_toplot)
     
