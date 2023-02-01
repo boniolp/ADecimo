@@ -73,3 +73,10 @@ methods_classical = [
     'bayes_{}_score',
     'qda_{}_score',
     'svc_linear_{}_score']
+
+
+method_group = {
+       'Transformer': methods_sit,
+       'Convolutional': methods_conv,
+       'Rocket': methods_ts,
+       'Features': methods_classical}
