@@ -14,10 +14,11 @@ df = pd.read_csv('data/merged_scores_{}.csv'.format('VUS_PR'))
 df = df.set_index('filename')
 
 def plot_box_plot(df):
-    fig = plt.figure(figsize=(10, int(0.21*len(df.columns))))
-    order = list(df_toplot.median().sort_values().index)[::-1]
-    sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h') 
-    st.pyplot(fig)
+    if len(df.columns) > 0:
+        fig = plt.figure(figsize=(10, min(30,int(0.40*len(df.columns)))))
+        order = list(df_toplot.median().sort_values().index)[::-1]
+        sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h') 
+        st.pyplot(fig)
     
 def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
     if type_exp == '_score':
