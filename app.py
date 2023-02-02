@@ -80,11 +80,13 @@ with tab_time:
     with tab_prediction:
         st.markdown('## Prediction Time Evaluation')
         df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_inf')
-        plot_box_plot(df_toplot,measure_name='seconds')
+        scale = st.radio('Select scale', ['linear', 'log'],key='scale_prediction')
+        plot_box_plot(df_toplot,measure_name='seconds',scale=scale)
     with tab_inference:
         st.markdown('## Inference Time Evaluation')
         df_toplot = generate_dataframe(df_time,datasets,methods_family,length,type_exp='_time')
-        plot_box_plot(df_toplot,measure_name='seconds',scale='log')
+        scale = st.radio('Select scale', ['linear', 'log'],key='scale_inference')
+        plot_box_plot(df_toplot,measure_name='seconds',scale=scale)
         
     
 with tab_stats:
