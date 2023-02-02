@@ -15,6 +15,10 @@ from constant import *
 df = pd.read_csv('data/merged_scores_{}.csv'.format('VUS_PR'))
 df = df.set_index('filename')
 
+df_time = pd.read_csv('data/inference_time.csv')
+df_time = df_time.rename(columns={'Unnamed: 0': 'filename'})
+df_time = df_time.set_index('filename')
+
 def plot_box_plot(df):
     if len(df.columns) > 0:
         st.dataframe(df_toplot)
@@ -28,6 +32,9 @@ def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
         return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score',type_exp) for method_g in methods_family for method in method_group[method_g] for l in length]+old_method]
     elif type_exp == '_inf':
         return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score',type_exp) for method_g in methods_family for method in method_group[method_g] for l in length]]
+    elif type_exp == '_time':
+        return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score','').replace('_default','') for method_g in methods_family for method in method_group[method_g] for l in length]]
+        
         
     
     
@@ -73,6 +80,8 @@ with tab_time:
         plot_box_plot(df_toplot)
     with tab_inference:
         st.markdown('## Inference Time Evaluation')
+        df_toplot = generate_dataframe(df_time,datasets,methods_family,length,type_exp='_time')
+        plot_box_plot(df_toplot)
         
     
 with tab_stats:
