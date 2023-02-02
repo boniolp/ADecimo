@@ -19,12 +19,15 @@ df_time = pd.read_csv('data/inference_time.csv')
 df_time = df_time.rename(columns={'Unnamed: 0': 'filename'})
 df_time = df_time.set_index('filename')
 
-def plot_box_plot(df):
+def plot_box_plot(df,measure_name,scale='linear'):
     if len(df.columns) > 0:
         st.dataframe(df_toplot)
         fig = plt.figure(figsize=(10, min(30,max(1,int(0.40*len(df.columns))))))
         order = list(df_toplot.median().sort_values().index)[::-1]
         sns.boxplot(data=df_toplot,order=order,showfliers = False, orient='h') 
+        plt.xlabel(measure_name)
+        if scale == 'log':
+            plt.xscale('log')
         st.pyplot(fig)
     
 def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
@@ -33,7 +36,7 @@ def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
     elif type_exp == '_inf':
         return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score',type_exp) for method_g in methods_family for method in method_group[method_g] for l in length]]
     elif type_exp == '_time':
-        return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score','').replace('_default','') for method_g in methods_family for method in method_group[method_g] for l in length]]
+        return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score','').replace('_default','') for method_g in methods_family for method in method_group[method_g] for l in length]+old_method]
         
         
     
@@ -66,7 +69,7 @@ with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
     df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
-    plot_box_plot(df_toplot)
+    plot_box_plot(df_toplot,measure_name=metric_name)
     
 with tab_time:
     st.markdown('# Execution Time Evaluation')
@@ -77,11 +80,11 @@ with tab_time:
     with tab_prediction:
         st.markdown('## Prediction Time Evaluation')
         df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_inf')
-        plot_box_plot(df_toplot)
+        plot_box_plot(df_toplot,measure_name='seconds')
     with tab_inference:
         st.markdown('## Inference Time Evaluation')
         df_toplot = generate_dataframe(df_time,datasets,methods_family,length,type_exp='_time')
-        plot_box_plot(df_toplot)
+        plot_box_plot(df_toplot,measure_name='seconds',scale='log')
         
     
 with tab_stats:
