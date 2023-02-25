@@ -111,8 +111,11 @@ with tab_stats:
 with tab_methods:
     tab_AD, tab_MS = st.tabs(["Anomaly Detection Methods", "Model Selection Methods"])
     with tab_AD:
-        st.markdown("Anomaly Detection Methods Description")
+        st.markdown("# Anomaly Detection Methods")
+        st.markdown(text_description_AD)
+        
     with tab_MS:
-        st.markdown("Model Selection Methods Description")
+        st.markdown("# Model Selection Methods")
+        st.markdown(text_description_MS)
     
     
