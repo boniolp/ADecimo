@@ -20,6 +20,9 @@ df_time = pd.read_csv('data/inference_time.csv')
 df_time = df_time.rename(columns={'Unnamed: 0': 'filename'})
 df_time = df_time.set_index('filename')
 
+df_time_train = pd.read_csv('data/inference_time.csv')
+df_time_train = df_time_train.drop('Unnamed: 0',1)
+
 def plot_box_plot(df,measure_name,scale='linear'):
     if len(df.columns) > 0:
         st.dataframe(df_toplot)
@@ -82,6 +85,7 @@ with tab_time:
     tab_training, tab_prediction, tab_inference = st.tabs(["Training Time", "Prediction Time", "Inference Time"])  
     with tab_training:
         st.markdown('## Training Time Evaluation')
+        st.dataframe(df_time_train)
     with tab_prediction:
         st.markdown('## Prediction Time Evaluation')
         df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_inf')
