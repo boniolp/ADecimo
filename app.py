@@ -30,7 +30,7 @@ def plot_box_plot(df,measure_name,scale='linear'):
         if scale == 'log':
             plt.xscale('log')
         st.pyplot(fig)
-    
+        
 def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
     if type_exp == '_score':
         return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score',type_exp) for method_g in methods_family for method in method_group[method_g] for l in length]+old_method]
@@ -78,7 +78,7 @@ with tab_acc:
     
 with tab_time:
     st.markdown('# Execution Time Evaluation')
-    st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: Prediction time in seconds')
+    st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark.')
     tab_training, tab_prediction, tab_inference = st.tabs(["Training Time", "Prediction Time", "Inference Time"])  
     with tab_training:
         st.markdown('## Training Time Evaluation')
