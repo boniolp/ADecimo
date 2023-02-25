@@ -21,7 +21,6 @@ df_time = df_time.rename(columns={'Unnamed: 0': 'filename'})
 df_time = df_time.set_index('filename')
 
 df_time_train = pd.read_csv('data/training_times.csv')
-df_time_train = df_time_train.drop('Unnamed: 0',1)
 
 def plot_box_plot(df,measure_name,scale='linear'):
     if len(df.columns) > 0:
