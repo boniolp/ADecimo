@@ -83,3 +83,29 @@ method_group = {
        'Convolutional': methods_conv,
        'Rocket': methods_ts,
        'Features': methods_classical}
+
+description_intro = f"""
+# MSAD: Model Selection for Anomaly Detection in Time Series
+
+Anomaly detection is a fundamental task for time-series analytics with important implications for the downstream performance of many applications. However, despite increasing academic interest and the large number of methods proposed in the literature, recent benchmark and evaluation studies demonstrated that no overall best anomaly detection methods exist when applied to very heterogeneous time series datasets. Therefore, the only scalable and viable solution to solve anomaly detection over very different time series collected from different domains is to propose a model selection method that will select, based on time series characteristics, the best anomaly detection method to run. Thus, this paper proposes a new pipeline for model selection based on time series classification and an extensive experimental evaluation of existing classification algorithms for this new pipeline. Our results demonstrate that model selection methods outperform every single anomaly detection method while being in the same order of magnitude regarding execution time.
+
+
+## Contributors
+
+* Emmanouil Sylligardos (ICS-FORTH)
+* Paul Boniol (Université Paris Cité)
+
+## Datasets and Models
+
+We host the datasets and pre-trained models at the following locations. Please download the datasets using the following links:
+
+- datasets: TODO
+- models: TODO
+
+## Model Selection Pipeline
+
+We propose a benchmark and an evaluation of 16 time series classifiers used as model selection methods (with 12 anomaly detectors to be selected) applied on 16 datasets from different domains. Our pipeline can be summarized in the following figure.
+"""
+
+
+
