@@ -134,5 +134,46 @@ Briefly, TSB-UAD includes the following datasets:
 
 
 """
+text_description_AD=f"""
+We use 12 anomaly detection methods proposed for univariate time series. The following table lists and describes the methods considered:
 
+| Anomaly Detection Method    | Description|
+|:--|:---------:|
+|Isolation Forest (IForest) | This method constructs the binary tree based on space splitting, and the nodes with shorter path lengths to the root are more likely to be anomalies. |
+|The Local Outlier Factor (LOF)| This method computes the ratio of the neighboring density to the local density. |
+|The Histogram-based Outlier Score (HBOS)| This method constructs a histogram for the data and the inverse of the height of the bin is used as the outlier score of the data point. |
+|Matrix Profile (MP)| This method calculates as anomaly the subsequence with the most significant 1-NN distance. |
+|NORMA| This method identifies the normal pattern based on clustering and calculates each point's effective distance to the normal pattern. |
+|Principal Component Analysis (PCA)| This method projects data to a lower-dimensional hyperplane, and data points with a significant distance from this plane can be identified as outliers. |
+|Autoencoder (AE)|This method projects data to the lower-dimensional latent space and reconstructs the data, and outliers are expected to have more evident reconstruction deviation. |
+|LSTM-AD| This method build a non-linear relationship between current and previous time series (using Long-Short-Term-Memory cells), and the outliers are detected by the deviation between the predicted and actual values. |
+|Polynomial Approximation (POLY)| This method build a non-linear relationship between current and previous time series (using polynomial decomposition), and the outliers are detected by the deviation between the predicted and actual values. |
+| CNN | This method build a non-linear relationship between current and previous time series (using convolutional Neural Network), and the outliers are detected by the deviation between the predicted and actual values. |
+|One-class Support Vector Machines (OCSVM)| This method fits the dataset to find the normal data's boundary. |
+
+You may find more details (and the references) in the TSB-UAD benchmark [paper](https://www.paparrizos.org/papers/PaparrizosVLDB22b.pdf).
+"""
+
+text_description_MS = f"""
+We consider 16 time series classification (TSC) algorithms used as model selection. The following table lists and describes the methods considered:
+
+| TSC  (as model seleciton)  | Description|
+|:--|:---------:|
+| SVC | maps training examples to points in space to maximize the gap between the two categories. |
+| Bayes | uses Bayes’ theorem to predict the class of a new data point using the posterior probabilities for each class. |
+| MLP | consists of multiple layers of interconnected neurons. |
+| QDA | is a discriminant analysis algorithm for classification problems. |
+| Adaboost | is a meta-algorithm using boosting technique with weak classifiers. |
+| Decision Tree | is a tree-based approach that splits data points into different leaves based on features. |
+| Random Forest  | is an ensemble Decision Trees fed with random samples (with replacement) of the training set and random set of features. |
+| kNN | assigns the most common class among its k nearest neighbors. |
+| Rocket | transforms input time series using a small set of convolutional kernels, and uses the transformed features to train a linear classifier. |
+| ConvNet  | uses convolutional layers to automatically and adaptively learn spatial hierarchies of features from input data. |
+| ResNet | is a ConvNet with residual connections between convolutional block. |
+| InceptionTime | is a combination of ResNets with kernels of multiple sizes. |
+| SIT-conv | is a transformer architecture with a convolutional layer as input. |
+| SIT-linear | is a transformer architecture for which the time series is divided into non-overlapping patches and linearly projected into the embedding space. |
+| SIT-stem | is a transformer architecture with convolutional layers with increasing dimensionality as input. |
+| SIT-stem-ReLU | is similar to SIT-stem but with Scaled ReLU. |
+"""
 
