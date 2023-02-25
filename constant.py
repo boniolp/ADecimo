@@ -106,11 +106,6 @@ Moreover, you can download the datasets and the models using the following links
 ## Model Selection Pipeline
 
 We propose a benchmark and an evaluation of 16 time series classifiers used as model selection methods (with 12 anomaly detectors to be selected) applied on 16 datasets from different domains. Our pipeline can be summarized in the following figure.
-
-<p align="center">
-<img width="1000" src="./figures/pipeline.jpg"/>
-</p>
-
 """
 
 
