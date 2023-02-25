@@ -65,7 +65,7 @@ with st.sidebar:
 df = pd.read_csv('data/merged_scores_{}.csv'.format(metric_name))
 df = df.set_index('filename')
 
-tab_desc,tab_acc, tab_time, tab_stats = st.tabs(["Description","Accuracy", "Execution Time", "Datasets"])  
+tab_desc,tab_acc, tab_time, tab_stats, tab_methods = st.tabs(["Description","Accuracy", "Execution Time", "Datasets", "Methods"])  
 with tab_desc:
     st.markdown(description_intro)
     image = Image.open('figures/pipeline.jpg')
@@ -107,4 +107,12 @@ with tab_stats:
         plt.yscale('log')
         plt.tight_layout()
     st.pyplot(fig)
+    
+with tab_methods:
+    tab_AD, tab_MS = st.tabs(["Anomaly Detection Methods", "Model Selection Methods"])
+    with tab_AD:
+        st.markdown("Anomaly Detection Methods Description")
+    with tab_MS:
+        st.markdown("Model Selection Methods Description")
+    
     
