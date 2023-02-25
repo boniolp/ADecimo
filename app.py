@@ -66,7 +66,7 @@ df = df.set_index('filename')
 
 tab_desc,tab_acc, tab_time, tab_stats = st.tabs(["Description","Accuracy", "Execution Time", "Datasets"])  
 with tab_desc:
-    st.markdown('# Description')
+    st.markdown(description_intro)
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
