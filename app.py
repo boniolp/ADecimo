@@ -92,6 +92,8 @@ with tab_time:
         
     
 with tab_stats:
+    st.markdown('# Dataset Description')
+    st.markdown(text_description_dataset)
     st.markdown('# Dataset Statistics')
     st.dataframe(df[dataset_stats])
     fig = plt.figure(figsize=(20, 4))
