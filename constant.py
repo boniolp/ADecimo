@@ -1,4 +1,4 @@
-list_measures = ['VUS_PR','AUC_PR','VUS_ROC','AUC_ROC']
+list_measures = ['VUS_PR','AUC_PR']
 
 list_length = [16,32,64,128,256,512,768,1024]
 
