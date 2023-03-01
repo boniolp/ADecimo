@@ -103,8 +103,8 @@ Anomaly detection is a fundamental task for time-series analytics with important
 We host the datasets and pre-trained models at the following locations. You may find more details oin the dataset and the models in the corresponding tabs.
 Moreover, you can download the datasets and the models using the following links:
 
-- datasets: TODO
-- models: TODO
+- datasets: https://drive.google.com/file/d/1PQKwu5lZTnTmsmms1ipko9KF712Oc5DE/view?usp=share_link
+- models: https://drive.google.com/file/d/1sQeqVZSBUuaJrvsueLtjLhACbARFS2dx/view?usp=sharing
 
 ## Model Selection Pipeline
 
