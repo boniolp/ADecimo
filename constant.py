@@ -92,8 +92,11 @@ Anomaly detection is a fundamental task for time-series analytics with important
 
 ## Contributors
 
-* Emmanouil Sylligardos (ICS-FORTH)
-* Paul Boniol (Université Paris Cité)
+* [Paul Boniol](https://boniolp.github.io/paulboniol/) (Université Paris Cité)
+* [Emmanouil Sylligardos]() (ICS-FORTH)
+* [John Paparrizos](https://www.paparrizos.org/) (Ohio State University)
+* [Panos Trahanias](https://www.linkedin.com/in/panos-trahanias-844bba108/?originalSubdomain=gr) (ICS-FORTH)
+* [Themis Palpanas](https://helios2.mi.parisdescartes.fr/~themisp/home.html) (Université Paris Cité)
 
 ## Datasets and Models
 
