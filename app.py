@@ -84,9 +84,9 @@ with tab_acc:
     	with col_ts:
     		time_series_selected = st.selectbox('Pick a time series', list(df.index))
     	with col_meth:
-    		method_selected = st.selectbox('Pick a method', all_length)
+    		method_selected = st.selectbox('Pick a method', methods_ens)
     	with col_length:
-    		length_selected = st.selectbox('Pick a window length', methods_ens)
+    		length_selected = st.selectbox('Pick a window length', list_length)
     	st.markdown(time_series_selected)
     	st.markdown(method_selected)
     	st.markdown(col_length)
