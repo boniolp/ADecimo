@@ -6,6 +6,7 @@ import seaborn as sns
 import pandas as pd
 import streamlit as st
 from PIL import Image
+import plotly.graph_objs as go
 
 from constant import *
 
@@ -42,7 +43,15 @@ def generate_dataframe(df,datasets,methods_family,length,type_exp='_score'):
 		return df.loc[df['dataset'].isin(datasets)][[method.format(l).replace('_score','').replace('_default','') for method_g in methods_family for method in method_group[method_g] for l in length]+old_method]
 		
 		
-	
+def add_rect(label,data):
+	anom_plt = [None]*len(data)
+	ts_plt = data.copy()
+	len_ts = len(data)
+	for i,lab in enumerate(label):
+		if lab == 1:
+			anom_plt[i] = data[i]
+			anom_plt[min(len_ts-1,i+1)] = data[min(len_ts-1,i+1)]
+	return anom_plt
 	
 with st.sidebar:
 	st.markdown('# ADecimo') 
@@ -92,19 +101,83 @@ with tab_acc:
 		
 		path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp + '.zip'
 		path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp + '.zip' for AD_method in old_method}
-		st.markdown(df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')])
-		st.markdown(path_ts)
-		st.markdown(path_ts_score)
+		
+		st.markdown("Detector selected by {} :{}".format(method_selected_exp,df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]))
+		#st.markdown(path_ts)
+		#st.markdown(path_ts_score)
 
 		ts_data_raw = pd.read_csv(path_ts,compression='zip', header=None).dropna().to_numpy()
 		label_data = ts_data_raw[:,1]
 		ts_data = ts_data_raw[:,0].astype(float)
-		st.line_chart(ts_data)
+		
 
-		score_AD_method = pd.DataFrame()
+
+
+
+		#st.line_chart(ts_data)
+
+		#score_AD_method = pd.DataFrame()
 		for meth in path_ts_score.keys():
 			score_AD_method[meth] = pd.read_csv(path_ts_score[meth],compression='zip', header=None).dropna().to_numpy()[:,0].astype(float)
-		st.area_chart(score_AD_method)
+		#st.area_chart(score_AD_method)
+
+		anom = add_rect(label,ts_data)
+		trace_scores = []
+		trace_scores.append(go.Scattergl(
+			x=list(range(len(ts_data))),
+			y=ts_data,
+			xaxis='x',
+			yaxis='y2',
+			name = "Time series",
+			mode = 'lines',
+			line = dict(color = 'blue',width=3),
+			opacity = 1
+		))
+		trace_scores.append(go.Scattergl(
+			x=list(range(len(ts_data))),
+			y=anom,
+			xaxis='x',
+			yaxis='y2',
+			name = "Anomalies",
+			mode = 'lines',
+			line = dict(color = 'red',width=3),
+			opacity = 1
+		))
+
+		for method_name in score_AD_method.columns:
+			trace_scores.append(go.Scattergl(
+				x=list(range(len(ts_data))),
+				y=[0] + list(score_AD_method[method_name].values[1:-1]) + [0],
+				name = "{} score".format(method_name),
+				opacity = 1,
+				mode = 'lines',
+				fill="tozeroy",
+			))
+
+
+
+		layout = go.Layout(
+			yaxis=dict(
+				domain=[0, 0.4],
+				range=[0,1]
+			),
+			yaxis2=dict(
+				domain=[0.45, 1],
+				range=[min(ts_data),max(ts_data)]
+			),
+			#showlegend=False,
+			title="{} time series snippet (40k points maximum)".format(data_cell[active_cell['row']]['filename'].split(".")[0]),
+			template="simple_white",
+			margin=dict(l=8, r=4, t=50, b=10),
+			height=375,
+			hovermode="x unified",
+			xaxis=dict(
+				range=[0,len(ts_data)]
+			)
+		)
+
+		fig = dict(data=trace_scores, layout=layout)
+		st.plotly_chart(fig, use_container_width=True)
 
 
 
