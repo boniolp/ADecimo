@@ -116,7 +116,7 @@ with tab_acc:
 
 		#st.line_chart(ts_data)
 
-		#score_AD_method = pd.DataFrame()
+		score_AD_method = pd.DataFrame()
 		for meth in path_ts_score.keys():
 			score_AD_method[meth] = pd.read_csv(path_ts_score[meth],compression='zip', header=None).dropna().to_numpy()[:,0].astype(float)
 		#st.area_chart(score_AD_method)
