@@ -89,7 +89,7 @@ with tab_acc:
     		length_selected = st.selectbox('Pick a window length', list_length)
     	st.markdown(time_series_selected)
     	st.markdown(method_selected)
-    	st.markdown(col_length)
+    	st.markdown(length_selected)
 
 
 
