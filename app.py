@@ -96,7 +96,8 @@ with tab_acc:
     	st.markdown(path_ts)
     	st.markdown(path_ts_score)
 
-    	#st.line_chart(chart_data)
+    	ts_data = pd.read_csv(path_ts,compression='zip', header=None).dropna().to_numpy()
+    	st.line_chart(ts_data)
 
 
 
