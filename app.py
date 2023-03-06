@@ -75,9 +75,16 @@ with tab_desc:
 with tab_acc:
     st.markdown('# Accuracy Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark. Measure used: {}'.format(metric_name))
-    df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
-    plot_box_plot(df_toplot,measure_name=metric_name)
-    
+    tab_overall, tab_explore = st.tabs(["Overall results", "Explore the results"])  
+    with tab_overall:
+    	df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
+    	plot_box_plot(df_toplot,measure_name=metric_name)
+    with tab_explore:
+    	time_series_selected = st.selectbox('Pick a time series', list(df.index))
+    	st.markdown(time_series_selected)
+
+
+
 with tab_time:
     st.markdown('# Execution Time Evaluation')
     st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark.')
