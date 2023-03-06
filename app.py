@@ -85,12 +85,14 @@ with tab_acc:
     		dataset_exp = st.selectbox('Pick a dataset', list(set(df['dataset'].values)))
     	with col_ts_exp:
     		time_series_selected_exp = st.selectbox('Pick a time series', list(df.loc[df['dataset']==dataset_exp].index))
-    	with col_meth_exp:
-    		method_selected_exp = st.selectbox('Pick a method', methods_ens)
     	with col_length_exp:
     		length_selected_exp = st.selectbox('Pick a window length', list_length)
-    	path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp
-    	path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp for AD_method in old_method}
+    	with col_meth_exp:
+    		method_selected_exp = st.selectbox('Pick a method', [meth.format(length_selected_exp) for meth in methods_ens])
+    	
+    	path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp + '.zip'
+    	path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp + '.zip' for AD_method in old_method}
+    	st.markdown(df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')])
     	st.markdown(path_ts)
     	st.markdown(path_ts_score)
 
