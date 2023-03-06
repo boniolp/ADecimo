@@ -102,7 +102,7 @@ with tab_acc:
 		path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp + '.zip'
 		path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp + '.zip' for AD_method in old_method}
 		
-		st.markdown("Detector selected by {} :{}".format(method_selected_exp,df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]))
+		st.markdown("Detector selected by {} : {}".format(method_selected_exp,df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]))
 
 		ts_data_raw = pd.read_csv(path_ts,compression='zip', header=None).dropna().to_numpy()
 		label_data = ts_data_raw[:,1]
@@ -121,56 +121,36 @@ with tab_acc:
 		anom = add_rect(label_data,ts_data)
 		trace_scores = []
 		trace_scores.append(go.Scattergl(
-			x=list(range(len(ts_data))),
-			y=ts_data,
-			xaxis='x',
-			yaxis='y2',
-			name = "Time series",
-			mode = 'lines',
-			line = dict(color = 'blue',width=3),
-			opacity = 1
+			x=list(range(len(ts_data))),y=ts_data,
+			xaxis='x',yaxis='y2',name = "Time series",mode = 'lines',
+			line = dict(color = 'blue',width=3),opacity = 1
 		))
 		trace_scores.append(go.Scattergl(
-			x=list(range(len(ts_data))),
-			y=anom,
-			xaxis='x',
-			yaxis='y2',
-			name = "Anomalies",
-			mode = 'lines',
-			line = dict(color = 'red',width=3),
-			opacity = 1
+			x=list(range(len(ts_data))),y=anom,
+			xaxis='x',yaxis='y2',name = "Anomalies",
+			mode = 'lines',line = dict(color = 'red',width=3),opacity = 1
 		))
 
 		for method_name in score_AD_method.columns:
+			if method_name == df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]:
+				alpha_val = 1
+			else:
+				alpha_val = 0.2
 			trace_scores.append(go.Scattergl(
 				x=list(range(len(ts_data))),
 				y=[0] + list(score_AD_method[method_name].values[1:-1]) + [0],
-				name = "{} score".format(method_name),
-				opacity = 1,
-				mode = 'lines',
-				fill="tozeroy",
+				name = "{} score".format(method_name),opacity = alpha_val,mode = 'lines',fill="tozeroy",
 			))
 
-
-
 		layout = go.Layout(
-			yaxis=dict(
-				domain=[0, 0.4],
-				range=[0,1]
-			),
-			yaxis2=dict(
-				domain=[0.45, 1],
-				range=[min(ts_data),max(ts_data)]
-			),
-			#showlegend=False,
+			yaxis=dict(domain=[0, 0.4],range=[0,1]),
+			yaxis2=dict(domain=[0.45, 1],range=[min(ts_data),max(ts_data)]),
 			title="{} time series snippet (40k points maximum)".format(time_series_selected_exp),
 			template="simple_white",
 			margin=dict(l=8, r=4, t=50, b=10),
 			height=375,
 			hovermode="x unified",
-			xaxis=dict(
-				range=[0,len(ts_data)]
-			)
+			xaxis=dict(range=[0,len(ts_data)])
 		)
 
 		fig = dict(data=trace_scores, layout=layout)
