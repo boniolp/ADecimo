@@ -80,7 +80,9 @@ with tab_acc:
     	df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
     	plot_box_plot(df_toplot,measure_name=metric_name)
     with tab_explore:
-    	col_ts, col_meth, col_length = st.columns([1,1,1])
+    	col_dataset, col_ts, col_meth, col_length = st.columns([1,1,1,1])
+    	with col_dataset:
+    		dataset_exp = st.selectbox('Pick a dataset', list(set(df['dataset'].values)))
     	with col_ts:
     		time_series_selected_exp = st.selectbox('Pick a time series', list(df.index))
     	with col_meth:
@@ -90,6 +92,12 @@ with tab_acc:
     	st.markdown(time_series_selected_exp)
     	st.markdown(method_selected_exp)
     	st.markdown(length_selected_exp)
+    	path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp
+    	path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp for AD_method in old_method}
+    	st.markdown(path_ts)
+    	st.markdown(path_ts_score)
+
+    	#st.line_chart(chart_data)
 
 
 
