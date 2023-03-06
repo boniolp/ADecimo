@@ -84,7 +84,7 @@ with tab_acc:
     	with col_dataset_exp:
     		dataset_exp = st.selectbox('Pick a dataset', list(set(df['dataset'].values)))
     	with col_ts_exp:
-    		time_series_selected_exp = st.selectbox('Pick a time series', list(df.index))
+    		time_series_selected_exp = st.selectbox('Pick a time series', list(df.loc[df['dataset']==dataset_exp].index))
     	with col_meth_exp:
     		method_selected_exp = st.selectbox('Pick a method', methods_ens)
     	with col_length_exp:
