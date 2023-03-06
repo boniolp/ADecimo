@@ -103,25 +103,22 @@ with tab_acc:
 		path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp + '.zip' for AD_method in old_method}
 		
 		st.markdown("Detector selected by {} :{}".format(method_selected_exp,df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]))
-		#st.markdown(path_ts)
-		#st.markdown(path_ts_score)
 
 		ts_data_raw = pd.read_csv(path_ts,compression='zip', header=None).dropna().to_numpy()
 		label_data = ts_data_raw[:,1]
 		ts_data = ts_data_raw[:,0].astype(float)
 		
 
-
-
-
-		#st.line_chart(ts_data)
+		
 
 		score_AD_method = pd.DataFrame()
 		for meth in path_ts_score.keys():
 			score_AD_method[meth] = pd.read_csv(path_ts_score[meth],compression='zip', header=None).dropna().to_numpy()[:,0].astype(float)
+		
+		#st.line_chart(ts_data)
 		#st.area_chart(score_AD_method)
 
-		anom = add_rect(label,ts_data)
+		anom = add_rect(label_data,ts_data)
 		trace_scores = []
 		trace_scores.append(go.Scattergl(
 			x=list(range(len(ts_data))),
