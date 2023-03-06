@@ -4,3 +4,4 @@ streamlit
 matplotlib
 numpy
 seaborn
+plotly
