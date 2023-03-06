@@ -80,8 +80,16 @@ with tab_acc:
     	df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
     	plot_box_plot(df_toplot,measure_name=metric_name)
     with tab_explore:
-    	time_series_selected = st.selectbox('Pick a time series', list(df.index))
+    	col_ts, col_meth, col_length = st.columns([1,1,1])
+    	with col_ts:
+    		time_series_selected = st.selectbox('Pick a time series', list(df.index))
+    	with col_meth:
+    		method_selected = st.selectbox('Pick a method', all_length)
+    	with col_length:
+    		length_selected = st.selectbox('Pick a window length', methods_ens)
     	st.markdown(time_series_selected)
+    	st.markdown(method_selected)
+    	st.markdown(col_length)
 
 
 
