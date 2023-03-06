@@ -80,18 +80,15 @@ with tab_acc:
     	df_toplot = generate_dataframe(df,datasets,methods_family,length,type_exp='_score')
     	plot_box_plot(df_toplot,measure_name=metric_name)
     with tab_explore:
-    	col_dataset, col_ts, col_meth, col_length = st.columns([1,1,1,1])
-    	with col_dataset:
+    	col_dataset_exp, col_ts_exp, col_meth_exp, col_length_exp = st.columns([1,1,1,1])
+    	with col_dataset_exp:
     		dataset_exp = st.selectbox('Pick a dataset', list(set(df['dataset'].values)))
-    	with col_ts:
+    	with col_ts_exp:
     		time_series_selected_exp = st.selectbox('Pick a time series', list(df.index))
-    	with col_meth:
+    	with col_meth_exp:
     		method_selected_exp = st.selectbox('Pick a method', methods_ens)
-    	with col_length:
+    	with col_length_exp:
     		length_selected_exp = st.selectbox('Pick a window length', list_length)
-    	st.markdown(time_series_selected_exp)
-    	st.markdown(method_selected_exp)
-    	st.markdown(length_selected_exp)
     	path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp
     	path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp for AD_method in old_method}
     	st.markdown(path_ts)
