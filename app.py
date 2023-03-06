@@ -82,14 +82,14 @@ with tab_acc:
     with tab_explore:
     	col_ts, col_meth, col_length = st.columns([1,1,1])
     	with col_ts:
-    		time_series_selected = st.selectbox('Pick a time series', list(df.index))
+    		time_series_selected_exp = st.selectbox('Pick a time series', list(df.index))
     	with col_meth:
-    		method_selected = st.selectbox('Pick a method', methods_ens)
+    		method_selected_exp = st.selectbox('Pick a method', methods_ens)
     	with col_length:
-    		length_selected = st.selectbox('Pick a window length', list_length)
-    	st.markdown(time_series_selected)
-    	st.markdown(method_selected)
-    	st.markdown(length_selected)
+    		length_selected_exp = st.selectbox('Pick a window length', list_length)
+    	st.markdown(time_series_selected_exp)
+    	st.markdown(method_selected_exp)
+    	st.markdown(length_selected_exp)
 
 
 
