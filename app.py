@@ -135,7 +135,7 @@ with tab_acc:
 			if method_name == df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]:
 				alpha_val = 1
 			else:
-				alpha_val = 0.2
+				alpha_val = 0.1
 			trace_scores.append(go.Scattergl(
 				x=list(range(len(ts_data))),
 				y=[0] + list(score_AD_method[method_name].values[1:-1]) + [0],
