@@ -163,7 +163,7 @@ with tab_acc:
 				range=[min(ts_data),max(ts_data)]
 			),
 			#showlegend=False,
-			title="{} time series snippet (40k points maximum)".format(data_cell[active_cell['row']]['filename'].split(".")[0]),
+			title="{} time series snippet (40k points maximum)".format(time_series_selected_exp),
 			template="simple_white",
 			margin=dict(l=8, r=4, t=50, b=10),
 			height=375,
