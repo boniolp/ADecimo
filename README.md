@@ -1,5 +1,5 @@
 <h1 align="center">ADecimo</h1>
-<h2 align="center">a Web-app for the Evaluation of Model selection for Anomaly Detection in Time Series</h2>
+<h2 align="center">A Web-app for the Evaluation of Model selection for Anomaly Detection in Time Series</h2>
 
 <div align="center">
 <p>
