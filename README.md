@@ -1,5 +1,5 @@
 <p align="center">
-<img width="150" src="./figures/ADecimo_logo.png"/>
+<img width="150" src="./figures/logo_ADecimo.png"/>
 </p>
 
 <h1 align="center">ADecimo</h1>
