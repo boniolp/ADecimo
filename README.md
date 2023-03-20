@@ -7,7 +7,7 @@
 </p>
 </div>
 
-
+<p align="center"><a href="https://adecimots.streamlit.app/">Try our demo</a></p>
 <p align="center">
 <img width="500" src="./figures/demo_capture.jpg"/>
 </p>
