@@ -1,3 +1,7 @@
+<p align="center">
+<img width="150" src="./figures/ADecimo_logo.png"/>
+</p>
+
 <h1 align="center">ADecimo</h1>
 <h2 align="center">A Web-app for the Evaluation of Model selection for Anomaly Detection in Time Series</h2>
 
