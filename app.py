@@ -91,7 +91,7 @@ with tab_acc:
 	with tab_explore:
 		col_dataset_exp, col_ts_exp, col_meth_exp, col_length_exp = st.columns([1,1,1,1])
 		with col_dataset_exp:
-			dataset_exp = st.selectbox('Pick a dataset', list(set(df['dataset'].values)))
+			dataset_exp = st.selectbox('Pick a dataset', list(set(df['dataset'].values))+['Upload your own'])
 		with col_ts_exp:
 			time_series_selected_exp = st.selectbox('Pick a time series', list(df.loc[df['dataset']==dataset_exp].index))
 		with col_length_exp:
@@ -99,14 +99,17 @@ with tab_acc:
 		with col_meth_exp:
 			method_selected_exp = st.selectbox('Pick a method', [meth.format(length_selected_exp) for meth in methods_ens])
 		
-		path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp + '.zip'
-		path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp + '.zip' for AD_method in old_method}
+		if dataset_exp == 'Upload your own':
+			uploaded_ts = st.file_uploader("Upload your time series")
+		else:
+			path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp + '.zip'
+			path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp + '.zip' for AD_method in old_method}
 		
-		st.markdown("Detector selected by {} : {}".format(method_selected_exp,df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]))
+			st.markdown("Detector selected by {} : {}".format(method_selected_exp,df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]))
 
-		ts_data_raw = pd.read_csv(path_ts,compression='zip', header=None).dropna().to_numpy()
-		label_data = ts_data_raw[:,1]
-		ts_data = ts_data_raw[:,0].astype(float)
+			ts_data_raw = pd.read_csv(path_ts,compression='zip', header=None).dropna().to_numpy()
+			label_data = ts_data_raw[:,1]
+			ts_data = ts_data_raw[:,0].astype(float)
 		
 
 		
