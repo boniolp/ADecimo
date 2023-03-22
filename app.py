@@ -114,50 +114,50 @@ with tab_acc:
 
 		
 
-		score_AD_method = pd.DataFrame()
-		for meth in path_ts_score.keys():
-			score_AD_method[meth] = pd.read_csv(path_ts_score[meth],compression='zip', header=None).dropna().to_numpy()[:,0].astype(float)
-		
-		#st.line_chart(ts_data)
-		#st.area_chart(score_AD_method)
+			score_AD_method = pd.DataFrame()
+			for meth in path_ts_score.keys():
+				score_AD_method[meth] = pd.read_csv(path_ts_score[meth],compression='zip', header=None).dropna().to_numpy()[:,0].astype(float)
 
-		anom = add_rect(label_data,ts_data)
-		trace_scores = []
-		trace_scores.append(go.Scattergl(
-			x=list(range(len(ts_data))),y=ts_data,
-			xaxis='x',yaxis='y2',name = "Time series",mode = 'lines',
-			line = dict(color = 'blue',width=3),opacity = 1
-		))
-		trace_scores.append(go.Scattergl(
-			x=list(range(len(ts_data))),y=anom,
-			xaxis='x',yaxis='y2',name = "Anomalies",
-			mode = 'lines',line = dict(color = 'red',width=3),opacity = 1
-		))
+			#st.line_chart(ts_data)
+			#st.area_chart(score_AD_method)
 
-		for method_name in score_AD_method.columns:
-			if method_name == df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]:
-				alpha_val = 1
-			else:
-				alpha_val = 0.05
+			anom = add_rect(label_data,ts_data)
+			trace_scores = []
 			trace_scores.append(go.Scattergl(
-				x=list(range(len(ts_data))),
-				y=[0] + list(score_AD_method[method_name].values[1:-1]) + [0],
-				name = "{} score".format(method_name),opacity = alpha_val,mode = 'lines',fill="tozeroy",
+				x=list(range(len(ts_data))),y=ts_data,
+				xaxis='x',yaxis='y2',name = "Time series",mode = 'lines',
+				line = dict(color = 'blue',width=3),opacity = 1
+			))
+			trace_scores.append(go.Scattergl(
+				x=list(range(len(ts_data))),y=anom,
+				xaxis='x',yaxis='y2',name = "Anomalies",
+				mode = 'lines',line = dict(color = 'red',width=3),opacity = 1
 			))
 
-		layout = go.Layout(
-			yaxis=dict(domain=[0, 0.4],range=[0,1]),
-			yaxis2=dict(domain=[0.45, 1],range=[min(ts_data),max(ts_data)]),
-			title="{} time series snippet (40k points maximum)".format(time_series_selected_exp),
-			template="simple_white",
-			margin=dict(l=8, r=4, t=50, b=10),
-			height=375,
-			hovermode="x unified",
-			xaxis=dict(range=[0,len(ts_data)])
-		)
+			for method_name in score_AD_method.columns:
+				if method_name == df.at[time_series_selected_exp,method_selected_exp.replace('_score','_class')]:
+					alpha_val = 1
+				else:
+					alpha_val = 0.05
+				trace_scores.append(go.Scattergl(
+					x=list(range(len(ts_data))),
+					y=[0] + list(score_AD_method[method_name].values[1:-1]) + [0],
+					name = "{} score".format(method_name),opacity = alpha_val,mode = 'lines',fill="tozeroy",
+				))
 
-		fig = dict(data=trace_scores, layout=layout)
-		st.plotly_chart(fig, use_container_width=True)
+			layout = go.Layout(
+				yaxis=dict(domain=[0, 0.4],range=[0,1]),
+				yaxis2=dict(domain=[0.45, 1],range=[min(ts_data),max(ts_data)]),
+				title="{} time series snippet (40k points maximum)".format(time_series_selected_exp),
+				template="simple_white",
+				margin=dict(l=8, r=4, t=50, b=10),
+				height=375,
+				hovermode="x unified",
+				xaxis=dict(range=[0,len(ts_data)])
+			)
+
+			fig = dict(data=trace_scores, layout=layout)
+			st.plotly_chart(fig, use_container_width=True)
 
 
 
