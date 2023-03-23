@@ -114,7 +114,7 @@ with tab_acc:
 					))
 					if len(ts_data_raw[0]) > 1:
 						label_data = ts_data_raw[:,1]
-						label_data = ts_data[:min(len(label_data),40000)]
+						label_data = label_data[:min(len(label_data),40000)]
 						anom = add_rect(label_data,ts_data)
 						trace_scores_uplaod.append(go.Scattergl(
 							x=list(range(len(ts_data))),y=anom,
