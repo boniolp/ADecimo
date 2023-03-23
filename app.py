@@ -13,6 +13,8 @@ from constant import *
 
 #plt.style.use('dark_background')
 
+st.set_page_config(page_title="ADecimo")
+
 
 df = pd.read_csv('data/merged_scores_{}.csv'.format('VUS_PR'))
 df = df.set_index('filename')
