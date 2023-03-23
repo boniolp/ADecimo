@@ -101,6 +101,42 @@ with tab_acc:
 		
 		if dataset_exp == 'Upload your own':
 			uploaded_ts = st.file_uploader("Upload your time series")
+			try:
+				trace_scores_uplaod = []
+				ts_data_raw = pd.read_csv(uploaded_ts, header=None).dropna().to_numpy()
+				ts_data = ts_data_raw[:,0].astype(float)
+				ts_data = ts_data[:min(len(ts_data),40000)]
+				if len(ts_data_raw) > 1:
+					label_data = ts_data_raw[:,1]
+					label_data = ts_data[:min(len(label_data),40000)]
+					anom = add_rect(label_data,ts_data)
+					trace_scores_uplaod.append(go.Scattergl(
+						x=list(range(len(ts_data))),y=anom,
+						xaxis='x',yaxis='y2',name = "Anomalies",
+						mode = 'lines',line = dict(color = 'red',width=3),opacity = 1
+					))
+				trace_scores_uplaod.append(go.Scattergl(
+					x=list(range(len(ts_data))),y=ts_data,
+					xaxis='x',yaxis='y2',name = "Time series",mode = 'lines',
+					line = dict(color = 'blue',width=3),opacity = 1
+				))
+				layout_upload = go.Layout(
+					yaxis=dict(domain=[0, 0.4],range=[0,1]),
+					yaxis2=dict(domain=[0.45, 1],range=[min(ts_data),max(ts_data)]),
+					title="Uploaded time series snippet (40k points maximum)",
+					template="simple_white",
+					margin=dict(l=8, r=4, t=50, b=10),
+					height=375,
+					hovermode="x unified",
+					xaxis=dict(range=[0,len(ts_data)])
+				)
+
+				fig = dict(data=trace_scores_uplaod, layout=layout_upload)
+				st.plotly_chart(fig, use_container_width=True)
+				
+				
+			except:
+				st.markdown('file format not supported yet, please upload a time series in the TSB-UAD format')
 		else:
 			path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp + '.zip'
 			path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp + '.zip' for AD_method in old_method}
