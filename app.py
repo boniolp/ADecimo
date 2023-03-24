@@ -112,8 +112,8 @@ with tab_acc:
 					ts_data = ts_data_raw[:,0].astype(float)
 					ts_data = ts_data[:min(len(ts_data),40000)]
 					
-					pred_detector,shape_seq = run_model(ts_data)
-					st.markdown("The Detector to select is {}".format(pred_detector))
+					#pred_detector,shape_seq = run_model(ts_data)
+					#st.markdown("The Detector to select is {}".format(pred_detector))
 					#st.markdown(shape_seq)
 					
 					
