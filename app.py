@@ -109,10 +109,13 @@ with tab_acc:
 					trace_scores_uplaod = []
 					ts_data_raw = pd.read_csv(uploaded_ts, header=None).dropna().to_numpy()
 					
-					pred_detector = run_model(ts_data_raw)
-					st.markdown(pred_detector)
 					ts_data = ts_data_raw[:,0].astype(float)
 					ts_data = ts_data[:min(len(ts_data),40000)]
+					
+					pred_detector = run_model(ts_data)
+					st.markdown(pred_detector)
+					
+					
 					trace_scores_uplaod.append(go.Scattergl(
 						x=list(range(len(ts_data))),y=ts_data,
 						xaxis='x',yaxis='y2',name = "Time series",mode = 'lines',
