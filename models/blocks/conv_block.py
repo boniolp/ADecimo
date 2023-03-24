@@ -14,7 +14,7 @@
 import torch
 import torch.nn as nn
 
-from layers.conv1d_same_padding import Conv1dSamePadding
+from models.layers.conv1d_same_padding import Conv1dSamePadding
 
 
 class ConvBlock(nn.Module):
