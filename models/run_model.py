@@ -50,7 +50,7 @@ def run_model(sequence):
 	)
 
 	# Load weights
-	model.load_state_dict(torch.load(weights_path))
+	model.load_state_dict(torch.load(weights_path, map_location='cpu'))
 	model.to('cpu')
 
 	# Normalize
