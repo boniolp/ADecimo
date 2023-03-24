@@ -38,7 +38,7 @@ detector_names = [
 def run_model(sequence):
 	"""
 	"""
-	weights_path = "weights/resnet_1024/model_30012023_183630"
+	weights_path = "models/weights/resnet_1024/model_30012023_183630"
 	window_size = 1024
 
 	# Load model
