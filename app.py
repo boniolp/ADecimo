@@ -112,8 +112,9 @@ with tab_acc:
 					ts_data = ts_data_raw[:,0].astype(float)
 					ts_data = ts_data[:min(len(ts_data),40000)]
 					
-					pred_detector = run_model(ts_data)
+					pred_detector,shape_seq = run_model(ts_data)
 					st.markdown(pred_detector)
+					st.markdown(shape_seq)
 					
 					
 					trace_scores_uplaod.append(go.Scattergl(
