@@ -13,8 +13,8 @@
 import torch
 import torch.nn as nn
 
-from blocks.conv_block import ConvBlock
-from layers.conv1d_same_padding import Conv1dSamePadding
+from models.blocks.conv_block import ConvBlock
+from models.layers.conv1d_same_padding import Conv1dSamePadding
 
 
 class ResNetBlock(nn.Module):
