@@ -8,6 +8,7 @@ import streamlit as st
 from PIL import Image
 import plotly.graph_objs as go
 
+from models.run_model import run_model
 from constant import *
 
 
@@ -107,6 +108,9 @@ with tab_acc:
 				try:
 					trace_scores_uplaod = []
 					ts_data_raw = pd.read_csv(uploaded_ts, header=None).dropna().to_numpy()
+					
+					pred_detector = run_model(ts_data_raw)
+					st.markdown(pred_detector)
 					ts_data = ts_data_raw[:,0].astype(float)
 					ts_data = ts_data[:min(len(ts_data),40000)]
 					trace_scores_uplaod.append(go.Scattergl(
