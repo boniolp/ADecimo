@@ -5,3 +5,5 @@ matplotlib
 numpy
 seaborn
 plotly
+collections
+torch==1.13.1

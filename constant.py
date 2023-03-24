@@ -33,7 +33,7 @@ methods = ['inception_time_default_16',
 
 old_method = ['IFOREST', 'LOF', 'MP', 'NORMA', 'IFOREST1', 'HBOS', 'OCSVM',
        'PCA', 'AE', 'CNN', 'LSTM', 'POLY']
-
+       
 oracle = ['GENIE','MORTY']
 
 methods_ens = [
