@@ -58,6 +58,7 @@ def run_model(sequence):
 
 	# Split timeseries
 	sequence = torch.from_numpy(split_ts(sequence, window_size)[:, np.newaxis]).to('cpu')
+	print(sequence.shape)
 
 	# Generate predictions
 	preds = model(sequence.float()).argmax(dim=1).tolist()
