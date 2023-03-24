@@ -58,7 +58,6 @@ def run_model(sequence):
 
 	# Split timeseries
 	sequence = torch.from_numpy(split_ts(sequence, window_size)[:, np.newaxis]).to('cpu')
-	print(sequence.shape)
 
 	# Generate predictions
 	preds = model(sequence.float()).argmax(dim=1).tolist()
@@ -68,7 +67,7 @@ def run_model(sequence):
 	most_voted = counter.most_common(1)
 	detector = most_voted[0][0]
 
-	return detector_names[detector]
+	return detector_names[detector],str(sequence.shape)
 
 
 '''
