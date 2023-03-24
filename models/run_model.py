@@ -15,9 +15,9 @@ from collections import Counter
 
 import torch
 
-from model.resnet import ResNetBaseline
-from utils.split_ts import split_ts
-from utils.norm import z_normalization
+from models.model.resnet import ResNetBaseline
+from models.utils.split_ts import split_ts
+from models.utils.norm import z_normalization
 
 # Detector (NOTE: run_model.py requires THIS specific order)
 detector_names = [
