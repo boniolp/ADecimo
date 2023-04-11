@@ -56,11 +56,8 @@ def run_model(sequence):
 	# Normalize
 	sequence = z_normalization(sequence, decimals=5)
 
-	# Split timeseries
+	# Split timeseries and load to cpu
 	sequence = split_ts(sequence, window_size)[:, np.newaxis]
-	plt.plot(sequence[0, 0])
-	plt.show()
-
 	sequence = torch.from_numpy(sequence).to('cpu')
 
 	# Generate predictions
