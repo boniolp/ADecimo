@@ -15,9 +15,9 @@ from collections import Counter
 
 import torch
 
-from model.resnet import ResNetBaseline
-from utils.split_ts import split_ts
-from utils.norm import z_normalization
+from models.model.resnet import ResNetBaseline
+from models.utils.split_ts import split_ts
+from models.utils.norm import z_normalization
 
 # Detector (NOTE: run_model.py requires THIS specific order)
 detector_names = [
@@ -38,7 +38,7 @@ detector_names = [
 def run_model(sequence):
 	"""
 	"""
-	weights_path = "weights/resnet_1024/model_10042023_172539"
+	weights_path = "models/weights/resnet_1024/model_10042023_172539"
 	window_size = 1024
 
 	# Load model
@@ -50,7 +50,7 @@ def run_model(sequence):
 	)
 
 	# Load weights
-	model.load_state_dict(torch.load(weights_path))
+	model.load_state_dict(torch.load(weights_path, map_location='cpu'))
 	model.to('cpu')
 
 	# Normalize
@@ -71,10 +71,10 @@ def run_model(sequence):
 	most_voted = counter.most_common(1)
 	detector = most_voted[0][0]
 
-	return detector_names[detector]
+	return detector_names[detector], str(sequence.shape)
 
 
-
+'''
 if __name__ == "__main__":
 	
 	# Signal set up
@@ -115,3 +115,4 @@ if __name__ == "__main__":
 	pred_detector = run_model(sequence)
 
 	print(pred_detector)
+'''

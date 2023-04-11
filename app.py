@@ -8,6 +8,7 @@ import streamlit as st
 from PIL import Image
 import plotly.graph_objs as go
 
+from models.run_model import run_model
 from constant import *
 
 
@@ -107,8 +108,15 @@ with tab_acc:
 				try:
 					trace_scores_uplaod = []
 					ts_data_raw = pd.read_csv(uploaded_ts, header=None).dropna().to_numpy()
+					
 					ts_data = ts_data_raw[:,0].astype(float)
 					ts_data = ts_data[:min(len(ts_data),40000)]
+					
+					#pred_detector,shape_seq = run_model(ts_data)
+					#st.markdown("The Detector to select is {}".format(pred_detector))
+					#st.markdown(shape_seq)
+					
+					
 					trace_scores_uplaod.append(go.Scattergl(
 						x=list(range(len(ts_data))),y=ts_data,
 						xaxis='x',yaxis='y2',name = "Time series",mode = 'lines',
@@ -139,8 +147,8 @@ with tab_acc:
 					st.plotly_chart(fig, use_container_width=True)
 
 
-				except:
-					st.markdown('file format not supported yet, please upload a time series in the TSB-UAD format')
+				except Exception as e:
+					st.markdown('file format not supported yet, please upload a time series in the TSB-UAD format: {}'.format(e))
 		else:
 			path_ts = 'data/benchmark_ts/' + dataset_exp + '/' + time_series_selected_exp + '.zip'
 			path_ts_score = {AD_method:'data/scores_ts/' + dataset_exp + '/' + AD_method + '/score/' + time_series_selected_exp + '.zip' for AD_method in old_method}

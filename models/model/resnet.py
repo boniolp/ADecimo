@@ -13,7 +13,7 @@
 import torch
 import torch.nn as nn
 
-from blocks.resnet_block import ResNetBlock
+from models.blocks.resnet_block import ResNetBlock
 
 
 class ResNetBaseline(nn.Module):	
