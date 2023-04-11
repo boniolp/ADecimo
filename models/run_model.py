@@ -10,7 +10,6 @@
 ########################################################################
 
 import numpy as np
-import matplotlib.pyplot as plt
 from collections import Counter
 
 import torch
@@ -38,7 +37,7 @@ detector_names = [
 def run_model(sequence):
 	"""
 	"""
-	weights_path = "models/weights/resnet_1024/model_10042023_172539"
+	weights_path = "models/weights/resnet_1024/model_30012023_183630"
 	window_size = 1024
 
 	# Load model
@@ -51,6 +50,7 @@ def run_model(sequence):
 
 	# Load weights
 	model.load_state_dict(torch.load(weights_path, map_location='cpu'))
+	model.eval()
 	model.to('cpu')
 
 	# Normalize
@@ -69,47 +69,3 @@ def run_model(sequence):
 	detector = most_voted[0][0]
 
 	return detector_names[detector], str(sequence.shape)
-
-
-'''
-if __name__ == "__main__":
-	
-	# Signal set up
-	Fs = 80
-	f = 5
-	samples = 8000
-
-	# Anomalies set up
-	noise_power = 0.8
-	n_anomalies = 1000
-	mean_anomalies_len = 50
-	anomalies_len_std = 10
-
-	# Generate signal
-	x = np.arange(samples)
-	y = np.sin(2 * np.pi * f * x / Fs) # + noise 
-
-	# Generate noise
-	anomalies_pos = np.random.randint(0, samples, n_anomalies)
-	anomalies_len = np.ceil(np.random.normal(mean_anomalies_len, anomalies_len_std, n_anomalies))
-	noise = noise_power * np.random.normal(0, 1, samples)
-
-	# Create anomalies mask
-	noise_mask = np.zeros(samples)
-	for pos, length in zip(anomalies_pos, anomalies_len):
-		start = int(max(pos - length // 2, 0))
-		end = int(min(pos + length // 2, samples))
-		
-		noise_mask[start:end] = 1
-	noise *= noise_mask
-	
-	# Combine
-	sequence = y + noise
-
-	# plt.plot(x, sequence)
-	# plt.show()
-
-	pred_detector = run_model(sequence)
-
-	print(pred_detector)
-'''
