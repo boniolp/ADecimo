@@ -38,7 +38,7 @@ detector_names = [
 def run_model(sequence):
 	"""
 	"""
-	weights_path = "weights/resnet_1024/model_30012023_183630"
+	weights_path = "weights/resnet_1024/model_10042023_172539"
 	window_size = 1024
 
 	# Load model
@@ -57,7 +57,11 @@ def run_model(sequence):
 	sequence = z_normalization(sequence, decimals=5)
 
 	# Split timeseries
-	sequence = torch.from_numpy(split_ts(sequence, window_size)[:, np.newaxis]).to('cpu')
+	sequence = split_ts(sequence, window_size)[:, np.newaxis]
+	plt.plot(sequence[0, 0])
+	plt.show()
+
+	sequence = torch.from_numpy(sequence).to('cpu')
 
 	# Generate predictions
 	preds = model(sequence.float()).argmax(dim=1).tolist()
@@ -70,17 +74,17 @@ def run_model(sequence):
 	return detector_names[detector]
 
 
-'''
+
 if __name__ == "__main__":
 	
 	# Signal set up
-	Fs = 800
+	Fs = 80
 	f = 5
 	samples = 8000
 
 	# Anomalies set up
-	noise_power = 0.3
-	n_anomalies = 10
+	noise_power = 0.8
+	n_anomalies = 1000
 	mean_anomalies_len = 50
 	anomalies_len_std = 10
 
@@ -111,4 +115,3 @@ if __name__ == "__main__":
 	pred_detector = run_model(sequence)
 
 	print(pred_detector)
-'''
