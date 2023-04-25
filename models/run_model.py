@@ -67,5 +67,8 @@ def run_model(sequence):
 	counter = Counter(preds)
 	most_voted = counter.most_common(1)
 	detector = most_voted[0][0]
-
-	return detector_names[detector], dict(counter)
+	
+	counter = dict(counter)
+	vote_summary = {detector_names[key]:counter[key] for key in counter}
+	
+	return detector_names[detector], vote_summary
