@@ -68,4 +68,4 @@ def run_model(sequence):
 	most_voted = counter.most_common(1)
 	detector = most_voted[0][0]
 
-	return detector_names[detector], str(sequence.shape)
+	return detector_names[detector], dict(counter)
