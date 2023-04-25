@@ -69,6 +69,8 @@ def run_model(sequence):
 	detector = most_voted[0][0]
 	
 	counter = dict(counter)
-	vote_summary = {detector_names[key]:counter[key] for key in counter}
+	vote_summary = {detector:0 for detector in detector_names}
+	for key in counter:
+		vote_summary[detector_names[key]] = counter[key]
 	
 	return detector_names[detector], vote_summary
