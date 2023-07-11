@@ -50,8 +50,8 @@ def plot_box_plot(df, measure_name, scale='linear'):
 		order = list(df_toplot.median().sort_values().index)[::-1]
 
 		# Create color pallete
-		my_pal = {method: methods_colors["detectors"] for method in old_methods}
-		for family, color in zip([methods_conv, methods_sit, methods_ts, methods_feature], [methods_colors["conv"], methods_colors["sit"], methods_colors["rocket"],methods_colors["feature_based"]]):
+		my_pal = {method: methods_colors["detectors"] for method in old_method}
+		for family, color in zip([methods_conv, methods_sit, methods_ts, methods_classical], [methods_colors["conv"], methods_colors["sit"], methods_colors["rocket"], methods_colors["feature_based"]]):
 			for length in all_length:
 				my_pal_tmp = {method.format(length):color for method in family}
 				my_pal = {**my_pal, **my_pal_tmp}
