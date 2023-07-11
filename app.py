@@ -59,7 +59,7 @@ def plot_box_plot(df, measure_name, scale='linear'):
 
 		# Create boxplot
 		sns.boxplot(data=df_toplot, order=order, showfliers = False, orient='h', saturation=1, whis=0.241289844)#, palette=my_pal
-		
+
 
 		# Change xtick labels to camera-ready names
 		# new_xticks_labels = []
@@ -72,7 +72,8 @@ def plot_box_plot(df, measure_name, scale='linear'):
 		# 		new_xticks_labels.append(tick_label)
 		# g.axes.set_xticklabels(new_xticks_labels)
 
-		plt.xlabel(final_names[measure_name])
+		# plt.xlabel(final_names[measure_name])
+		plt.xlabel(measure_name)
 		if scale == 'log':
 			plt.xscale('log')
 		st.pyplot(fig)
