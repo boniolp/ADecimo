@@ -84,6 +84,62 @@ method_group = {
        'Rocket': methods_ts,
        'Features': methods_classical}
 
+template_names = {
+    'inception_time_{}': 'InceptTime-{}',
+    'convnet_{}': 'ConvNet-{}',
+    'resnet_{}': 'ResNet-{}',
+    'sit_conv_{}': 'SiT-conv-{}',
+    'sit_linear_{}': 'SiT-linear-{}',
+    'sit_stem_{}': 'SiT-stem-{}',
+    'sit_stem_relu_{}': 'SiT-stem-ReLU-{}',
+    'rocket_{}': 'Rocket-{}',
+    'ada_boost_{}': 'AdaBoost-{}',
+    'knn_{}': 'kNN-{}',
+    'decision_tree_{}': 'DecisionTree-{}',
+    'random_forest_{}': 'RandomForest-{}',
+    'mlp_{}': 'MLP-{}',
+    'bayes_{}': 'Bayes-{}',
+    'qda_{}': 'QDA-{}',
+    'svc_linear_{}': 'SVC-{}',
+    'IFOREST': 'IForest',
+    'LOF': 'LOF',
+    'MP': 'MP',
+    'NORMA': 'NormA',
+    'IFOREST1': 'IForest1',
+    'HBOS': 'HBOS',
+    'OCSVM': 'OCSVM',
+    'PCA': 'PCA',
+    'AE': 'AE',
+    'CNN': 'CNN',
+    'LSTM': 'LSTM',
+    'POLY': 'POLY',
+    'Avg Ens': 'Avg Ens',
+    'Oracle': 'Oracle',
+    'best_ms': 'Best MS',
+    'VUS_PR': 'VUS-PR',
+    'label': 'Label',
+    'best_ms': 'Best MS',
+    'convnet': 'ConvNet',
+    'resnet': 'ResNet',
+    'rocket': 'Rocket',
+    'knn': 'kNN',
+    'sit_stem': 'SiT-stem',
+    'sit': 'SiT',
+    'feature_based': 'Feature-based',
+    'AUC_PR': 'AUC-PR',
+}
+
+final_names = {}
+for length in all_length:
+    for key, value in template_names.items():
+        if '{}' in key:
+            new_key = key.format(length)
+            new_value = value.format(length)
+            final_names[new_key] = new_value
+        else:
+            final_names[key] = value
+
+
 description_intro = f"""
 # Model Selection for Anomaly Detection in Time Series
 
@@ -94,7 +150,7 @@ Github repo: https://github.com/boniolp/MSAD
 ## Contributors
 
 * [Paul Boniol](https://boniolp.github.io/paulboniol/) (Université Paris Cité)
-* [Emmanouil Sylligardos](https://www.linkedin.com/in/emmanouil-sylligardos/?originalSubdomain=gr) (ICS-FORTH)
+* [Emmanouil Sylligardos](https://www.linkedin.com/in/emmanouil-sylligardos/) (ICS-FORTH)
 * [John Paparrizos](https://www.paparrizos.org/) (Ohio State University)
 * [Panos Trahanias](https://www.linkedin.com/in/panos-trahanias-844bba108/?originalSubdomain=gr) (ICS-FORTH)
 * [Themis Palpanas](https://helios2.mi.parisdescartes.fr/~themisp/home.html) (Université Paris Cité)

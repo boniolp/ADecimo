@@ -27,6 +27,9 @@ df_time = df_time.set_index('filename')
 df_time_train = pd.read_csv('data/training_times.csv')
 
 def plot_box_plot(df, measure_name, scale='linear'):
+
+	print(final_names)
+
 	if len(df.columns) > 0:
 		st.dataframe(df_toplot)
 		fig = plt.figure(figsize=(10, min(30, max(1, int(0.40*len(df.columns))))))
