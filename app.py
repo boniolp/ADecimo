@@ -82,7 +82,7 @@ df = df.set_index('filename')
 tab_desc, tab_acc, tab_time, tab_stats, tab_methods = st.tabs(["Description", "Accuracy", "Execution Time", "Datasets", "Methods"])  
 with tab_desc:
 	st.markdown(description_intro)
-	image = Image.open('figures/3_pipeline.pdf')
+	image = Image.open('figures/3_pipeline.jpg')
 	st.image(image, caption='Overview of the model selection pipeline')
 with tab_acc:
 	st.markdown('# Accuracy Evaluation')
