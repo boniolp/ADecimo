@@ -40,7 +40,7 @@ def init_names(all_length, template_names):
 
 	return final_names
 
-final_names = init_names(all_length, template_names)
+final_names = init_names(list_length, template_names)
 
 def plot_box_plot(df, measure_name, scale='linear'):
 
