@@ -31,7 +31,7 @@ def plot_box_plot(df, measure_name, scale='linear'):
 		st.dataframe(df_toplot)
 		fig = plt.figure(figsize=(10, min(30, max(1, int(0.40*len(df.columns))))))
 		order = list(df_toplot.median().sort_values().index)[::-1]
-		sns.boxplot(data=df_toplot, order=order, showfliers = False, orient='h', saturation=1, whis=0.241289844)
+		sns.boxplot(data=df_toplot, order=order, showfliers = False, orient='h', saturation=.2, whis=1)# saturation=1, whis=0.241289844
 		plt.xlabel(measure_name)
 		if scale == 'log':
 			plt.xscale('log')
