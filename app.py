@@ -52,6 +52,7 @@ def plot_box_plot(df, measure_name, scale='linear'):
 		order = list(df_toplot.median().sort_values().index)[::-1]
 		sns.boxplot(data=df_toplot, order=order, showfliers = False, orient='h', saturation=1, whis=0.241289844)
 		plt.xlabel(measure_name)
+		plt.xlabel(final_names['inception_time_16'])
 		if scale == 'log':
 			plt.xscale('log')
 		st.pyplot(fig)
