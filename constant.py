@@ -129,16 +129,6 @@ template_names = {
     'AUC_PR': 'AUC-PR',
 }
 
-final_names = {}
-for length in all_length:
-    for key, value in template_names.items():
-        if '{}' in key:
-            new_key = key.format(length)
-            new_value = value.format(length)
-            final_names[new_key] = new_value
-        else:
-            final_names[key] = value
-
 
 description_intro = f"""
 # Model Selection for Anomaly Detection in Time Series
