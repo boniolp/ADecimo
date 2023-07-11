@@ -129,6 +129,21 @@ template_names = {
     'AUC_PR': 'AUC-PR',
 }
 
+# Set up methods' colors
+methods_colors = {
+    "oracle": "#FFFFFF",
+    "avg_ens": "#FF7133",
+    "best_ms": "#33D4FF",
+    "detectors": "#CCCCCC",
+    "feature_based": "#91AAC2",
+    "sit": "#FFB522",
+    "conv": "#4494FF",
+    "conv_2": "#0048FF",
+    "rocket": "#EA7DFF",
+    "best_ad_train": "#228B22",
+    "worst_ad_test": "#8B0000",
+}
+
 
 description_intro = f"""
 # Model Selection for Anomaly Detection in Time Series

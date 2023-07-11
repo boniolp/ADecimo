@@ -27,9 +27,9 @@ df_time = df_time.set_index('filename')
 df_time_train = pd.read_csv('data/training_times.csv')
 
 
-def init_names(all_length, template_names):
+def init_names(list_length, template_names):
 	final_names = {}
-	for length in all_length:
+	for length in list_length:
 		for key, value in template_names.items():
 			if '{}' in key:
 				new_key = key.format(length)
@@ -44,6 +44,7 @@ final_names = init_names(list_length, template_names)
 
 def plot_box_plot(df, measure_name, scale='linear'):
 	if len(df.columns) > 0:
+
 		st.dataframe(df_toplot)
 		fig = plt.figure(figsize=(10, min(30, max(1, int(0.40*len(df.columns))))))
 
@@ -52,10 +53,21 @@ def plot_box_plot(df, measure_name, scale='linear'):
 		# Create color pallete
 		# my_pal = {method: methods_colors["detectors"] for method in old_method}
 		# for family, color in zip([methods_conv, methods_sit, methods_ts, methods_classical], [methods_colors["conv"], methods_colors["sit"], methods_colors["rocket"], methods_colors["feature_based"]]):
-		# 	for length in all_length:
+		# 	for length in list_length:
 		# 		my_pal_tmp = {method.format(length):color for method in family}
 		# 		my_pal = {**my_pal, **my_pal_tmp}
 		# my_pal = {**my_pal,**{"Avg Ens": methods_colors["avg_ens"], 'Oracle': methods_colors["oracle"]}}
+		
+		# # Add same names with '_inf' instead of '_score'
+		# if measure_name == 'seconds':
+		# 	my_pal_plus = {}
+		# 	for key in my_pal.keys():
+		# 		my_pal_plus[key.replace('_score', '_inf')] = my_pal[key]
+		# 		my_pal_plus[key.replace('_score', '')] = my_pal[key]
+		# 		my_pal_plus[key.replace('_default', '')] = my_pal[key]
+		# 	my_pal = my_pal_plus
+
+		# print(df_toplot.columns)
 
 		# Create boxplot
 		sns.boxplot(data=df_toplot, order=order, showfliers = False, orient='h', saturation=1, whis=0.241289844)#, palette=my_pal
