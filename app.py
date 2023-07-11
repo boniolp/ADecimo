@@ -44,7 +44,7 @@ final_names = init_names(list_length, template_names)
 
 def plot_box_plot(df, measure_name, scale='linear'):
 
-	# print(final_names)
+	print(final_names)
 
 	if len(df.columns) > 0:
 		st.dataframe(df_toplot)
