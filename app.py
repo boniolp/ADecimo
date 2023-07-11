@@ -43,16 +43,35 @@ def init_names(all_length, template_names):
 final_names = init_names(list_length, template_names)
 
 def plot_box_plot(df, measure_name, scale='linear'):
-
-	print(final_names)
-
 	if len(df.columns) > 0:
 		st.dataframe(df_toplot)
 		fig = plt.figure(figsize=(10, min(30, max(1, int(0.40*len(df.columns))))))
+
 		order = list(df_toplot.median().sort_values().index)[::-1]
-		sns.boxplot(data=df_toplot, order=order, showfliers = False, orient='h', saturation=1, whis=0.241289844)
-		plt.xlabel(measure_name)
-		plt.xlabel(final_names['inception_time_16'])
+
+		# Create color pallete
+		my_pal = {method: methods_colors["detectors"] for method in old_methods}
+		for family, color in zip([methods_conv, methods_sit, methods_ts, methods_feature], [methods_colors["conv"], methods_colors["sit"], methods_colors["rocket"],methods_colors["feature_based"]]):
+			for length in all_length:
+				my_pal_tmp = {method.format(length):color for method in family}
+				my_pal = {**my_pal, **my_pal_tmp}
+		my_pal = {**my_pal,**{"Avg Ens": methods_colors["avg_ens"], 'Oracle': methods_colors["oracle"]}}
+
+		# Create boxplot
+		sns.boxplot(data=df_toplot, palette=my_pal, order=order, showfliers = False, orient='h', saturation=1, whis=0.241289844)
+
+		# Change xtick labels to camera-ready names
+		new_xticks_labels = []
+		for i, tick_label in enumerate(g.axes.get_xticklabels()):
+			method_name = tick_label.get_text()
+			if method_name in final_names:
+				tick_label.set_text(final_names[method_name])
+			else:
+				tick_label.set_text(method_name)
+				new_xticks_labels.append(tick_label)
+		g.axes.set_xticklabels(new_xticks_labels)
+
+		plt.xlabel(final_names[measure_name])
 		if scale == 'log':
 			plt.xscale('log')
 		st.pyplot(fig)
