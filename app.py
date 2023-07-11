@@ -72,7 +72,7 @@ def plot_box_plot(df, measure_name, scale='linear'):
 		# 		new_xticks_labels.append(tick_label)
 		# g.axes.set_xticklabels(new_xticks_labels)
 
-		# plt.xlabel(final_names[measure_name])
+		# plt.xlabel(final_names[measure_name]) wtf
 		plt.xlabel(measure_name)
 		if scale == 'log':
 			plt.xscale('log')
