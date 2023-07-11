@@ -27,7 +27,7 @@ df_time = df_time.set_index('filename')
 df_time_train = pd.read_csv('data/training_times.csv')
 
 
-def init_names():
+def init_names(all_length, template_names):
 	final_names = {}
 	for length in all_length:
 		for key, value in template_names.items():
@@ -40,7 +40,7 @@ def init_names():
 
 	return final_names
 
-final_names = init_names()
+final_names = init_names(all_length, template_names)
 
 def plot_box_plot(df, measure_name, scale='linear'):
 
