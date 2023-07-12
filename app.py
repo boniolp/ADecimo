@@ -7,6 +7,7 @@ import pandas as pd
 import streamlit as st
 from PIL import Image
 import plotly.graph_objs as go
+import plotly.express as px
 
 from models.run_model import run_model
 from constant import *
@@ -24,8 +25,7 @@ df_time = pd.read_csv('data/inference_time.csv')
 df_time = df_time.rename(columns={'Unnamed: 0': 'filename'})
 df_time = df_time.set_index('filename')
 
-df_time_train = pd.read_csv('data/training_times.csv')
-
+df_time_train = pd.read_csv('data/training_times.csv', index_col='window_size')
 
 def init_names(list_length, template_names):
 	final_names = {}
@@ -51,40 +51,25 @@ def plot_box_plot(df, measure_name, scale='linear'):
 		order = list(df_toplot.median().sort_values().index)[::-1]
 
 		# Create color pallete
-		# my_pal = {method: methods_colors["detectors"] for method in old_method}
-		# for family, color in zip([methods_conv, methods_sit, methods_ts, methods_classical], [methods_colors["conv"], methods_colors["sit"], methods_colors["rocket"], methods_colors["feature_based"]]):
-		# 	for length in list_length:
-		# 		my_pal_tmp = {method.format(length):color for method in family}
-		# 		my_pal = {**my_pal, **my_pal_tmp}
-		# my_pal = {**my_pal,**{"Avg Ens": methods_colors["avg_ens"], 'Oracle': methods_colors["oracle"]}}
+		my_pal = {method: methods_colors["detectors"] for method in old_method}
+		for family, color in zip([methods_conv, methods_sit, methods_ts, methods_classical], [methods_colors["conv"], methods_colors["sit"], methods_colors["rocket"], methods_colors["feature_based"]]):
+			for length in list_length:
+				my_pal_tmp = {method.format(length):color for method in family}
+				my_pal = {**my_pal, **my_pal_tmp}
+		my_pal = {**my_pal,**{"Avg Ens": methods_colors["avg_ens"], 'Oracle': methods_colors["oracle"]}}
+				
+		# Add same names with '_inf' instead of '_score'
+		my_pal_plus = {}
+		for key in my_pal.keys():
+			my_pal_plus[key] = my_pal[key]
+			my_pal_plus[key.replace('_score', '_inf')] = my_pal[key]
+			my_pal_plus[key.replace('_score', '')] = my_pal[key]
+			my_pal_plus[key.replace('_default', '')] = my_pal[key]
+			my_pal_plus[key.replace('_default', '').replace('_score', '')] = my_pal[key]
 		
-		# # Add same names with '_inf' instead of '_score'
-		# if measure_name == 'seconds':
-		# 	my_pal_plus = {}
-		# 	for key in my_pal.keys():
-		# 		my_pal_plus[key.replace('_score', '_inf')] = my_pal[key]
-		# 		my_pal_plus[key.replace('_score', '')] = my_pal[key]
-		# 		my_pal_plus[key.replace('_default', '')] = my_pal[key]
-		# 	my_pal = my_pal_plus
-
-		# print(df_toplot.columns)
-
 		# Create boxplot
-		sns.boxplot(data=df_toplot, order=order, showfliers = False, orient='h', saturation=1, whis=0.241289844)#, palette=my_pal
+		g = sns.boxplot(data=df_toplot, order=order, palette=my_pal_plus, showfliers = False, orient='h', saturation=1, whis=0.241289844)
 
-
-		# Change xtick labels to camera-ready names
-		# new_xticks_labels = []
-		# for i, tick_label in enumerate(g.axes.get_xticklabels()):
-		# 	method_name = tick_label.get_text()
-		# 	if method_name in final_names:
-		# 		tick_label.set_text(final_names[method_name])
-		# 	else:
-		# 		tick_label.set_text(method_name)
-		# 		new_xticks_labels.append(tick_label)
-		# g.axes.set_xticklabels(new_xticks_labels)
-
-		# plt.xlabel(final_names[measure_name]) wtf
 		plt.xlabel(measure_name)
 		if scale == 'log':
 			plt.xscale('log')
@@ -267,17 +252,17 @@ with tab_acc:
 with tab_time:
 	st.markdown('# Execution Time Evaluation')
 	st.markdown('Overall evaluation of 125 classification algorithm used for model selection for anoamly detection. We use the 496 randomly selected time series from the TSB-UAD benchmark.')
-	tab_training, tab_prediction, tab_inference = st.tabs(["Training Time", "Prediction Time", "Inference Time"])  
+	tab_training, tab_prediction, tab_inference = st.tabs(["Training Time", "Selection Time", "Detection Time"])  
 	with tab_training:
 		st.markdown('## Training Time Evaluation')
 		st.dataframe(df_time_train)
 	with tab_prediction:
-		st.markdown('## Prediction Time Evaluation')
+		st.markdown('## Selection Time Evaluation')
 		df_toplot = generate_dataframe(df, datasets, methods_family, length, type_exp='_inf')
 		scale = st.radio('Select scale', ['linear', 'log'], key='scale_prediction')
 		plot_box_plot(df_toplot, measure_name='seconds', scale=scale)
 	with tab_inference:
-		st.markdown('## Inference Time Evaluation')
+		st.markdown('## Detection Time Evaluation')
 		df_toplot = generate_dataframe(df_time, datasets, methods_family, length, type_exp='_time')
 		scale = st.radio('Select scale', ['linear', 'log'], key='scale_inference')
 		plot_box_plot(df_toplot, measure_name='seconds', scale=scale)
@@ -288,9 +273,10 @@ with tab_stats:
 	st.markdown(text_description_dataset)
 	st.markdown('# Dataset Statistics')
 	st.dataframe(df[dataset_stats])
-	fig = plt.figure(figsize=(20, 4))
+	fig = plt.figure(figsize=(10, 20))
 	for i, elem_stat in enumerate(dataset_stats_real):
-		plt.subplot(1, len(dataset_stats_real), 1+i)
+		# plt.subplot(1, len(dataset_stats_real), 1+i)
+		plt.subplot(4, 2, 1+i)
 		sns.histplot(x=df[elem_stat].values, bins=30, fill=True)
 		plt.xlabel(elem_stat)
 		plt.yscale('log')
