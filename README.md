@@ -18,7 +18,27 @@
 
 
 Anomaly detection is a fundamental task for time-series analytics with important implications for the downstream performance of many applications. Despite increasing academic interest and the large number of methods proposed in the literature, recent benchmark and evaluation studies demonstrated that no overall best anomaly detection methods exist when applied to very heterogeneous time series datasets. Therefore, the only scalable and viable solution to solve anomaly detection over very different time series collected from different domains is to propose a model selection method that will select, based on time series characteristics, the best anomaly detection method to run.Thus, this paper proposes a new pipeline for model selection based on time series classification and an extensive experimental evaluation of existing classification algorithms for this new pipeline. Our results demonstrate that model selection methods outperform every single anomaly detection method while being in the same order of magnitude regarding execution time.
-All the experimewntal results are accessible here: https://adecimots.streamlit.app/
+All the experimental results are accessible here: https://adecimots.streamlit.app/ and in our [paper](https://www.researchgate.net/publication/373337385_Choose_Wisely_An_Extensive_Evaluation_of_Model_Selection_for_Anomaly_Detection_in_Time_Series).
+
+
+### Reference
+
+> "Choose Wisely: An Extensive Evaluation of Model Selection for Anomaly Detection in Time Series"<br/>
+> Emmanouil Sylligardos, Paul Boniol, John Paparrizos, Panos Trahanias and Themis Palpanas.<br/>
+> Proceedings of the VLDB Endowment (**PVLDB 2023**) Journal, Volume 16(11), pages 3418-3432<br/>
+
+```bibtex
+@article{boniolMSAD2023,
+  title={Choose Wisely: An Extensive Evaluation of Model Selection for Anomaly Detection in Time Series},
+  author={Sylligardos, Emmanouil and Boniol, Paul and Paparrizos, John and Trahanias, Panos and Palpanas, Themis},
+  journal={Proceedings of the VLDB Endowment},
+  volume={16},
+  number={11},
+  pages={3418--3432},
+  year={2023},
+  publisher={VLDB Endowment}
+}
+```
 
 ## Contributors
 
