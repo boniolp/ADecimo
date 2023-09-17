@@ -69,7 +69,7 @@ Briefly, TSB-UAD includes the following datasets:
 |SMD (Server Machine Dataset)| is a 5-week-long dataset collected from a large Internet company. This dataset contains 3 groups of entities from 28 different machines.|
 |SVDB| includes 78 half-hour ECG recordings chosen to supplement the examples of  supraventricular arrhythmias in the MIT-BIH Arrhythmia Database.|
 
-You may find more details (and the references) in the TSB-UAD benchmark [paper](https://www.paparrizos.org/papers/PaparrizosVLDB22a.pdf).
+You may find more details (and the references) in the TSB-UAD benchmark [paper](https://www.paparrizos.org/papers/PaparrizosVLDB22a.pdf). Please note that the time series used in this repository are snippets (i.e., small subsets of the original time series) of the TSB-UAD benchmark.
 
 ## Anomaly Detectors
 
