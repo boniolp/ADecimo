@@ -9,21 +9,16 @@
 import streamlit as st
 from PIL import Image
 import pandas as pd
+from st_pages import Page, show_pages, add_page_title
 
 from utils.constant import description_intro, list_measures, list_length, method_group, template_names
 from utils.helper import init_names
 
 
-from st_pages import Page, show_pages, add_page_title
-
-
-
 # Setup
-# Optional -- adds the title and icon to the current page
-add_page_title()
+add_page_title() # Optional -- adds the title and icon to the current page
 
-# Specify what pages should be shown in the sidebar, and what their titles 
-# and icons should be
+# Specify what pages should be shown in the sidebar
 show_pages(
 	[
 		Page("app.py", "ADecimo", "🏠"),  # Home emoji is correct
