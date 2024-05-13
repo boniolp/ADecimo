@@ -44,7 +44,7 @@ with tab_statistics:
 	st.markdown('# Dataset Statistics')
 	if datasets:
 		st.dataframe(df[df['dataset'].isin(datasets)][dataset_stats_real])
-		print(dataset_stats_real)
+		
 		# Filter the dataframe based on selected datasets
 		filtered_df = df[df['dataset'].isin(datasets)]
 		

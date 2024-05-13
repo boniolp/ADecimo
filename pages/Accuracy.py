@@ -59,6 +59,8 @@ with tab_overall:
 
 	# Generate dataframe for plotting
 	df_toplot = generate_dataframe(df, datasets, methods_family, length, type_exp='_score')
+	st.dataframe(df_toplot)
+
 	# Plot box plot using Plotly
 	plot_box_plot(df_toplot, measure_name=metric_name)
 
