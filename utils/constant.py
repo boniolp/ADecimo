@@ -7,7 +7,7 @@ Github repo: https://github.com/boniolp/MSAD
 
 ## Contributors
 
-* [Paul Boniol](https://boniolp.github.io/paulboniol/) (Université Paris Cité)
+* [Paul Boniol](https://boniolp.github.io/paulboniol/) (Inria, ENS, CNRS)
 * [Emmanouil Sylligardos](https://www.linkedin.com/in/emmanouil-sylligardos/) (École Normale Supérieure)
 * [John Paparrizos](https://www.paparrizos.org/) (Ohio State University)
 * [Panos Trahanias](https://www.linkedin.com/in/panos-trahanias-844bba108/?originalSubdomain=gr) (ICS-FORTH)
