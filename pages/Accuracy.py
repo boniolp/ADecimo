@@ -104,14 +104,14 @@ with tab_explore:
 				# Plot time series and detected anomalies
 				trace_scores_upload = [go.Scattergl(x=list(range(len(ts_data))), y=ts_data,
 													mode='lines', line=dict(color='blue', width=3),
-													name="Time series")]
+													name="Time series", yaxis='y2')]
 				if len(ts_data_raw[0]) > 1:
 					label_data = ts_data_raw[:, 1]
 					label_data = label_data[:min(len(label_data), 40000)]
 					anom = add_rect(label_data, ts_data)
 					trace_scores_upload.append(go.Scattergl(x=list(range(len(ts_data))), y=anom,
 															mode='lines', line=dict(color='red', width=3),
-															name="Anomalies"))
+															name="Anomalies", yaxis='y2'))
 				
 				# Define layout for uploaded data plot
 				layout_upload = go.Layout(
