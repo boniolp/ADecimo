@@ -1,5 +1,5 @@
 # Project-specific ignores
-references/
+references/poster/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
