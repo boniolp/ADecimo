@@ -42,8 +42,8 @@ All the experimental results are accessible here: https://adecimots.streamlit.ap
 
 ## Contributors
 
-* Emmanouil Sylligardos (ICS-FORTH)
-* Paul Boniol (Université Paris Cité)
+* Emmanouil Sylligardos (ENS, Inria)
+* Paul Boniol (Inria, ENS, DIENS, PLS, CNRS)
 
 ## Datasets 
 
